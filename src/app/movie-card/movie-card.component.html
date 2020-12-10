@@ -1,0 +1,13 @@
+<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+    <div class="card-header">{{movie.title}} - {{movie.year}}</div>
+    <img src={{movie.image}} class="card-img-top" alt="...">
+    <div class="card-body">
+      
+        <p class="card-text">{{movie.description}}</p>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let rating of ratings">
+                {{rating.source}}: {{rating.rating}} ({{rating.numberVotes}})
+            </li>
+        </ul>
+    </div>
+</div>

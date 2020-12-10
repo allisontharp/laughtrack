@@ -1,0 +1,10 @@
+<br>
+<h2>&nbsp;Movies</h2>
+<br>
+<div class="jumbotron">
+  <div class="card-deck" style="margin-left: 50px; margin-top: 25px;">
+    <div *ngFor="let m of movies">
+      <app-movie-card [movie]="m"></app-movie-card>
+    </div>
+  </div>
+</div>
