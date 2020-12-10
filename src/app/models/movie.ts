@@ -7,5 +7,6 @@ export interface Movie {
     image?: string,
     ratings?: Rating[],
     watched: boolean,
-    dateWatched?: Date
+    dateWatched?: Date,
+    id: number
   }
