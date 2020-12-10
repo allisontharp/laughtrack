@@ -1,25 +1,23 @@
 <div class="card border-secondary  mb-3" style="width: 20rem;">
     <img src={{movie.image}} class="card-img-top" alt={{movie.title}}>
     <div class="card-body">
-        <h5 class="card-title">{{movie.title}}</h5>
+        <h5 class="card-title font-size: 55px">{{movie.title}}</h5>
         <div>
             <h6 class="card-subtitle">
                 <i class="fas fa-star"></i>
                 {{imdbRating.rating}}
                 <div style="display: inline; float: right;">
-
                     {{movie.year}}
                 </div>
             </h6>
         </div>
         <br>
         <div *ngIf="movie.watched==false; else removeWatched">
-            <button type="button" class="btn btn-secondary btn-block">Add to watched</button>
+            <button type="button" class="btn btn-secondary btn-block btn-sm">Add to watched</button>
         </div>
-
     </div>
 </div>
 
 <ng-template #removeWatched>
-    <button type="button" class="btn btn-warning btn-block">Remove from watched</button>
+    <button type="button" class="btn btn-warning btn-block btn-sm">Remove from watched</button>
 </ng-template>
