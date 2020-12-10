@@ -14,9 +14,13 @@ export class MovieCardComponent implements OnInit {
   @Input()
   movie!: Movie;
   ratings: any;
+  imdbRating!: Rating;
   
   ngOnInit(): void {
     this.ratings = this.movie.ratings;
+    this.imdbRating = this.ratings.filter(function (rating: Rating) {
+      return rating.source === 'IMDB';
+    })[0]
   }
 
 }

@@ -1,10 +1,27 @@
 <br>
 <h2>&nbsp;Movies</h2>
 <br>
-<div class="jumbotron">
-  <div class="card-deck" style="margin-left: 50px; margin-top: 25px;">
-    <div *ngFor="let m of movies">
-      <app-movie-card [movie]="m"></app-movie-card>
-    </div>
+<div >
+  <div class="jumbotron">
+    <!-- Filter Bar -->
+    <div class="d-inline-block" style="margin-left: 65px;">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                All Movies:
+            </button>
+            <div class="dropdown-menu border-secondary" aria-labelledby="dropdownMenuButton" >
+                <a class="dropdown-item" >Watched</a>
+                <a class="dropdown-item">Not Watched</a>
+                <a class="dropdown-item" >Both</a>
+            </div>
+        </div>
+    </div><!-- !filterBar -->
+
+    <!-- Card Stack -->
+    <div class="card-deck" style="margin-left: 50px; margin-top: 25px;">
+      <div *ngFor="let m of movies">
+        <app-movie-card [movie]="m"></app-movie-card>
+      </div>
+    </div> <!-- !cardStack -->
   </div>
 </div>
