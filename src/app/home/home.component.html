@@ -18,7 +18,7 @@
     </div><!-- !filterBar -->
 
     <!-- Card Stack -->
-    <div class="card-deck" style="margin-left: 50px; margin-top: 25px;">
+    <div class="card-deck" style="margin-left: 50px; margin-top: 25px; ">
       <div *ngFor="let m of movies | filter:{watched: filterWatched, title: filterTitle}">
         <app-movie-card [movie]="m"></app-movie-card>
       </div>

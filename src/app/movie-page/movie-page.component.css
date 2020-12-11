@@ -1,0 +1,22 @@
+.list-group-item
+{
+  overflow:hidden;  
+  position: relative;
+  display: block;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  color: #ddd;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  max-width: 5rem;
+  text-align: center;
+}
+
+.year{
+    background-color: #839496;
+  }
+
+.AFI100{
+    background-color: red
+}

@@ -1,4 +1,5 @@
 import { Rating } from './rating';
+import { Tag } from './tag';
 
 export interface Movie {
     title: string,
@@ -19,4 +20,5 @@ export interface Movie {
     budget?: string,
     openingWeekendUSA?: string,
     worldwideGross?: string
+    tags?: Tag[]
   }

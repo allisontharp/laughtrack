@@ -10,8 +10,8 @@ import {Rating} from '../models/rating';
 export class MovieCardComponent implements OnInit {
 
   constructor() { }
-  @Input()
-  movie!: Movie;
+  @Input() movie!: Movie;
+  @Input() showTags: boolean = true;
   ratings: any;
   imdbRating!: Rating;
   

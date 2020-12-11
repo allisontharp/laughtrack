@@ -3,7 +3,7 @@
 <div>
     <div class="jumbotron">
         <div class="card-deck" style=" margin-top: 25px;">
-            <app-movie-card [movie]="movie"></app-movie-card>
+            <app-movie-card [movie]="movie" [showTags]="false"></app-movie-card>
 
             <!-- Description -->
             <div class="card border-secondary  mb-3">
@@ -21,7 +21,17 @@
                     <b>Budget:</b> {{movie.budget}}
                     <br><b>Opening Weekend USA:</b> {{movie.openingWeekendUSA}}
                     <br><b>Worldwide Gross:</b> {{movie.worldwideGross}}
-                    
+                    <hr>
+                    <div>
+                        <h4 style="display: inline;"><b>Tags</b></h4>
+                        &nbsp;<div class="badge badge-pill badge-secondary" style="display: inline;"><i class="fas fa-plus"></i></div>
+                    </div>
+                    <ul class="list-group list-group-horizontal">
+                        <div *ngFor="let tag of movie.tags">
+                            <div class="list-group-item {{tag.type}}">{{tag.value}}</div>
+                        </div>
+                    </ul>
+
                 </div>
             </div>
 

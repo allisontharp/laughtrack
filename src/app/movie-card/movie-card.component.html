@@ -1,20 +1,29 @@
-<div class="card border-secondary  mb-3" style="width: 20rem;">
-    <img src="{{movie.image}}" class="card-img-top" alt={{movie.title}} >
+<div class="card border-secondary  mb-3" style="width: 20pc;">
+    <img src="{{movie.image}}" class="card-img-top" alt={{movie.title}}>
     <div class="card-body">
         <h5 class="card-title font-size: 55px">
             <a href="Movie/{{movie.id}}" class="card-title font-size: 55px">{{movie.title}}</a>
         </h5>
-        <!-- <h5 class="card-title font-size: 55px">{{movie.title}}</h5> -->
         <div>
             <h6 class="card-subtitle">
                 <i class="fas fa-star"></i>
                 {{imdbRating.rating}}
-                <div style="display: inline; float: right;">
+                <div style="float: right;">
                     {{movie.year}}
                 </div>
             </h6>
         </div>
-        <br>
+        <ul class="list-group list-group-horizontal">
+            <div *ngIf="showTags">
+                <div *ngIf="movie.tags; else noTags">
+                    <div *ngFor="let tag of movie.tags">
+                        <div *ngIf="tag.visible">
+                            <li class="list-group-item {{tag.type}}">{{tag.value}}</li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
         <div *ngIf="movie.watched==='notWatched'; else removeWatched">
             <button type="button" class="btn btn-secondary btn-block btn-sm">Add to watched</button>
         </div>
@@ -23,4 +32,10 @@
 
 <ng-template #removeWatched>
     <button type="button" class="btn btn-warning btn-block btn-sm">Remove from watched</button>
+</ng-template>
+
+<ng-template #noTags>
+    <div style="height: 57px">
+        <br>
+    </div>
 </ng-template>
