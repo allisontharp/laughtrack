@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Movie } from '../models/movie';
 import {Rating} from '../models/rating';
 
-
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
@@ -21,6 +20,7 @@ export class MovieCardComponent implements OnInit {
     this.imdbRating = this.ratings.filter(function (rating: Rating) {
       return rating.source === 'IMDB';
     })[0]
+    console.log(this.movie);
   }
 
 }

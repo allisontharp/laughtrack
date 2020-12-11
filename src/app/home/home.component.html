@@ -1,24 +1,42 @@
 <h2 style="margin-left: 20px; margin-top: 25px;">&nbsp;Movies</h2>
 <br>
-<div >
+<div>
   <div class="jumbotron">
     <!-- Filter Bar -->
     <div class="d-inline-block" style="margin-left: 65px;">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                All Movies:
-            </button>
-            <div class="dropdown-menu border-secondary" aria-labelledby="dropdownMenuButton" >
-                <a class="dropdown-item" >Watched</a>
-                <a class="dropdown-item">Not Watched</a>
-                <a class="dropdown-item" >Both</a>
-            </div>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="watchedDropDown" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          All Movies:
+        </button>
+        <div class="dropdown-menu border-secondary" aria-labelledby="watchedDropDown">
+          <a class="dropdown-item" (click)="setFilterStatus('filterWatched', 'hasWatched')">Watched</a>
+          <a class="dropdown-item" (click)="setFilterStatus('filterWatched', 'notWatched')">Not Watched</a>
+          <a class="dropdown-item" (click)="setFilterStatus('filterWatched', undefined)">Both</a>
         </div>
+      </div>
+    </div>
+    <div class="d-inline-block" style="margin-left: 10px;">
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="ratingDropDown" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Rating:
+        </button>
+        <div class="dropdown-menu border-secondary" aria-labelledby="ratingDropDown">
+          <a class="dropdown-item" (click)="setFilterStatus('filterRating', 5)">5</a>
+          <a class="dropdown-item" (click)="setFilterStatus('filterRating', 4)">4 & Up</a>
+          <a class="dropdown-item" (click)="setFilterStatus('filterRating', 3)">3 & Up</a>
+          <a class="dropdown-item" (click)="setFilterStatus('filterRating', 2)">2 & Up</a>
+          <a class="dropdown-item" (click)="setFilterStatus('filterRating', undefined)">1 & Up</a>
+        </div>
+      </div>
     </div><!-- !filterBar -->
 
     <!-- Card Stack -->
     <div class="card-deck" style="margin-left: 50px; margin-top: 25px;">
-      <div *ngFor="let m of movies">
+      <div *ngFor="let m of movies | filter:{watched: filterWatched}">
+        <!-- <div *ngFor="let m of movies"> -->
         <app-movie-card [movie]="m"></app-movie-card>
       </div>
     </div> <!-- !cardStack -->

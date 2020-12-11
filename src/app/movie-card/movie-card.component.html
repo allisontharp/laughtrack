@@ -1,8 +1,8 @@
 <div class="card border-secondary  mb-3" style="width: 20rem;">
-    <img src={{movie.image}} class="card-img-top" alt={{movie.title}}>
+    <img src="{{movie.image}}" class="card-img-top" alt={{movie.title}} >
     <div class="card-body">
-            <h5 class="card-title font-size: 55px">
-                <a href="Movie/{{movie.id}}" class="card-title font-size: 55px">{{movie.title}}</a>
+        <h5 class="card-title font-size: 55px">
+            <a href="Movie/{{movie.id}}" class="card-title font-size: 55px">{{movie.title}}</a>
         </h5>
         <!-- <h5 class="card-title font-size: 55px">{{movie.title}}</h5> -->
         <div>
@@ -15,7 +15,7 @@
             </h6>
         </div>
         <br>
-        <div *ngIf="movie.watched==false; else removeWatched">
+        <div *ngIf="movie.watched==='notWatched'; else removeWatched">
             <button type="button" class="btn btn-secondary btn-block btn-sm">Add to watched</button>
         </div>
     </div>

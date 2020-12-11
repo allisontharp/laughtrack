@@ -7,18 +7,19 @@ import { HomeComponent } from './home/home.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { MoviePageComponent } from './movie-page/movie-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { FilterPipe } from './pipes/filter/filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MovieCardComponent,
     MoviePageComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
