@@ -17,6 +17,15 @@ export class DatabaseService {
       , watched: "hasWatched"
       , liked: true
       , id: 1
+      , director: 'Barry Levinson'
+      , writer: 'Mitch Markowitz'
+      , stars: 'Robin Williams, Forest Whitaker, Tom. T. Tran'
+      , releaseDate: '12 January 1988 (USA)'
+      , runtime: '121 min'
+      , genres: 'Biography, Comedy, Drama, War'
+      , budget: '$13,000,000'
+      , openingWeekendUSA: '$194,308'
+      , worldwideGross: '$123,922,370'
     },
     {
       title: 'The Nutty Professor', year: 1963, description: `A timid, nearsighted chemistry teacher discovers a magical potion that can transform him into a suave and handsome Romeo. 

@@ -9,12 +9,24 @@
             <div class="card border-secondary  mb-3">
                 <div class="card-body">
                     {{movie.description}}
+                    <hr>
+                    <b>Director:</b> {{movie.director}}
+                    <br><b>Writer:</b> {{movie.writer}}
+                    <br><b>Stars:</b> {{movie.stars}}
+                    <br><b>Runtime:</b> {{movie.runtime}}
+                    <br><b>Release Date:</b> {{movie.releaseDate}}
+                    <br><b>Genres:</b> {{movie.genres}}
+                    <hr>
+                    <h4><b>Box Office</b></h4>
+                    <b>Budget:</b> {{movie.budget}}
+                    <br><b>Opening Weekend USA:</b> {{movie.openingWeekendUSA}}
+                    <br><b>Worldwide Gross:</b> {{movie.worldwideGross}}
+                    
                 </div>
             </div>
 
             <!-- Logger -->
             <div class="card border-secondary mb-3" style="max-width: 25%">
-
                 <app-logger-card [movie]="movie"></app-logger-card>
             </div>
         </div>

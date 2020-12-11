@@ -1,41 +1,64 @@
 <div class="card-body">
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item ">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm text-center">
-                        <button type="button" class="btn btn-outline-secondary" style="margin: 3pt" *ngIf="movie.watched==='notWatched'; else watched">
-                            <i class="far fa-eye"><br>Watch</i>
-                        </button>
-                        <button type="button" class="btn btn-outline-secondary" style="margin: 3pt" *ngIf="!movie.liked; else liked">
-                            <i class="far fa-heart"><br>Like</i>
-                        </button>
-                        <button type="button" class="btn btn-outline-secondary" style="margin: 3pt">
-                            <i class="fas fa-plus"><br>Add</i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </li>
+    <div class="row">
         <div class="col-sm text-center">
-
-            <li class="list-group-item">
-                Troy Rating:
-                <ngb-rating [(rate)]="troyRate" [max]="5">
-                    <ng-template let-fill="fill" let-index="index">
-                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                    </ng-template>
-                </ngb-rating>
-                <br>
-                Al Rating:
-                <ngb-rating [(rate)]="alRate" [max]="5">
-                    <ng-template let-fill="fill" let-index="index">
-                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                    </ng-template>
-                </ngb-rating>
-            </li>
+            <button type="button" class="btn btn-outline-secondary" style="margin: 3pt" *ngIf="movie.watched==='notWatched'; else watched">
+                <i class="far fa-eye"><br>Watch</i>
+            </button>
+            <button type="button" class="btn btn-outline-secondary" style="margin: 3pt" *ngIf="!movie.liked; else liked">
+                <i class="far fa-heart"><br>Like</i>
+            </button>
+            <button type="button" class="btn btn-outline-secondary" style="margin: 3pt">
+                <i class="fas fa-plus"><br>Add</i>
+            </button>
         </div>
-    </ul>
+    </div>
+    <hr>
+    <div class="col-sm text-center">
+        Troy Rating:
+        <ngb-rating [(rate)]="troyRate" [max]="5">
+            <ng-template let-fill="fill" let-index="index">
+                <span class="star" [class.filled]="fill === 100">&#9733;</span>
+            </ng-template>
+        </ngb-rating>
+        <br>
+        Al Rating:
+        <ngb-rating [(rate)]="alRate" [max]="5">
+            <ng-template let-fill="fill" let-index="index">
+                <span class="star" [class.filled]="fill === 100">&#9733;</span>
+            </ng-template>
+        </ngb-rating>
+    </div>
+    <hr>
+    <h4><b>Comments</b></h4>
+    <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 " style="max-height: 100px; ">
+        Troy really liked this one, I thought it was OK.
+        Troy really liked this one, I thought it was OK.
+        Troy really liked this one, I thought it was OK.
+        Troy really liked this one, I thought it was OK.
+        Troy really liked this one, I thought it was OK.
+        Troy really liked this one, I thought it was OK.
+        Troy really liked this one, I thought it was OK.
+        Troy really liked this one, I thought it was OK.
+        Troy really liked this one, I thought it was OK.
+        Troy really liked this one, I thought it was OK.
+        Troy really liked this one, I thought it was OK.
+        Troy really liked this one, I thought it was OK.
+        Troy really liked this one, I thought it was OK.
+        Troy really liked this one, I thought it was OK.
+        Troy really liked this one, I thought it was OK.
+        Troy really liked this one, I thought it was OK.
+        Troy really liked this one, I thought it was OK.
+    </div>
+
+    <br><br>
+    <div class="form-group">
+        <label for="exampleTextarea"><b>Add Comment</b></label>
+        <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+        <button type="button" class="btn btn-secondary" style="float: right;">
+            Submit
+        </button>
+    </div>
+
 </div>
 
 <ng-template #watched>

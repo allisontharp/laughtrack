@@ -9,5 +9,14 @@ export interface Movie {
     watched: string,
     dateWatched?: Date,
     liked?: boolean,
-    id: number
+    id: number,
+    director?: string,
+    writer?: string,
+    stars?: string,
+    runtime?: string,
+    releaseDate?: string,
+    genres?: string,
+    budget?: string,
+    openingWeekendUSA?: string,
+    worldwideGross?: string
   }
