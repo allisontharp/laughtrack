@@ -20,7 +20,6 @@ export class MovieCardComponent implements OnInit {
     this.imdbRating = this.ratings.filter(function (rating: Rating) {
       return rating.source === 'IMDB';
     })[0]
-    console.log(this.movie);
   }
 
 }

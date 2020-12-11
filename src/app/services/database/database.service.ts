@@ -39,7 +39,6 @@ export class DatabaseService {
 
   getMovie(id: number){
     let movies = this.getMovies();
-    console.log(movies)
     let movie = movies.filter(function (movie: Movie) {
       return movie.id == id;
     })[0];

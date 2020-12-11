@@ -10,8 +10,8 @@ import { DatabaseService } from '../services/database/database.service';
 })
 export class HomeComponent implements OnInit {
   movies: Movie[] = [];
-  filterWatched: string = 'notWatched';
-  filterRating: number = 0;
+  filterWatched: string | undefined;
+  filterRating: number | undefined;
 
   constructor(
     private dbService: DatabaseService
@@ -27,9 +27,6 @@ export class HomeComponent implements OnInit {
       case "filterWatched": this.filterWatched = status; break;
       case "filterRating": this.filterRating = status; break;
     }
-  
-    console.log(this.filterWatched);
-    console.log(this.filterRating)
   }
 
 }

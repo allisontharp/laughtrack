@@ -5,17 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
   transform(items: any, filter: any): any {
     if (filter && Array.isArray(items)) {
       let filterKeys = Object.keys(filter);
-      console.log('filter')
-      console.log(filter)
-      console.log('filterKeys')
-      console.log(filterKeys)
-      console.log('items:')
-      console.log(items)
       return items.filter((item) => {
-        var x = r(filterKeys, filter, item)
-        console.log('x')
-        console.log(x)
-        return x
+        return checkIsFiltered(filterKeys, filter, item)
       });
     } else {
       return items;
@@ -23,21 +14,13 @@ import { Pipe, PipeTransform } from '@angular/core';
   }
 }
 
-function wtf(memo: any, filter: any, keyName: string, item: any) {
-  console.log(`memo: ${JSON.stringify(memo)}`)
-  console.log(`keyName: ${keyName}`)
-  console.log(`keyValue: ${filter[keyName]}`)
-  console.log(new RegExp(filter[keyName], 'gi').test(item[keyName]))
-  console.log('result:')
-  console.log((memo && new RegExp(filter[keyName], 'gi').test(item[keyName])) || filter[keyName] === "")
-  console.log('item:')
-  console.log(item)
+function compare(memo: any, filter: any, keyName: string, item: any) {
   return (memo && new RegExp(filter[keyName], 'gi').test(item[keyName])) || filter[keyName] === ""
 }
 
-function r(filterKeys: any, filter: any, item: any) {
+function checkIsFiltered(filterKeys: any, filter: any, item: any) {
   return filterKeys.reduce(
     (memo: any, keyName:any) =>
-      wtf(memo, filter, keyName, item), true
+    compare(memo, filter, keyName, item), true
   )
 }
