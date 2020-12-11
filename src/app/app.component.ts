@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'laughtrack';
+  searchInput: any;
+
+  search(event: any){
+    console.log(this.searchInput)
+  }
 }

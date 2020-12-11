@@ -14,45 +14,9 @@
 
             <!-- Logger -->
             <div class="card border-secondary mb-3" style="max-width: 25%">
-                <div class="card-body">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item col-md-10">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <div class="col-md-3 text-center">
-                                            <span class="far fa-eye"> </span>
-                                        </div>
-                                        Watch
-                                    </div>
-                                    <div class="col-sm">
-                                        <div class="col-md-3 text-center">
-                                            <span class="far fa-heart"> </span>
-                                        </div>
-                                        Like
-                                    </div>
-                                    <div class="col-md">
-                                        <div class="col-md-5 text-center">
-                                            <span class="fas fa-plus"></span>
-                                        </div>
-                                        Add
-                                    </div>
-                                </div>
-                            </div>
 
-                        </li>
-                        <li class="list-group-item">
-                            Rate:
-                            <ngb-rating [(rate)]="currentRate" [max]="5">
-                                <ng-template let-fill="fill" let-index="index">
-                                    <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                                </ng-template>
-                            </ngb-rating>
-                        </li>
-                    </ul>
-                </div>
+                <app-logger-card></app-logger-card>
             </div>
-
         </div>
     </div>
 </div>

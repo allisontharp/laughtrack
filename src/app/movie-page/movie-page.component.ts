@@ -11,7 +11,6 @@ import { DatabaseService } from '../services/database/database.service';
 export class MoviePageComponent implements OnInit {
   private sub: any;
   movie!: Movie;
-  currentRate = 0;
   constructor(
     private route: ActivatedRoute,
     private dbService: DatabaseService

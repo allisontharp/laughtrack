@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
+import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__, Input } from '@angular/core';
 import { Movie } from '../models/movie';
 import { Rating } from '../models/rating';
 import { DatabaseService } from '../services/database/database.service';
@@ -11,7 +11,7 @@ import { DatabaseService } from '../services/database/database.service';
 export class HomeComponent implements OnInit {
   movies: Movie[] = [];
   filterWatched: string | undefined;
-  filterRating: number | undefined;
+  @Input() filterTitle: string | undefined;
 
   constructor(
     private dbService: DatabaseService
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   setFilterStatus(filterName: string, status: any) {
     switch (filterName) {
       case "filterWatched": this.filterWatched = status; break;
-      case "filterRating": this.filterRating = status; break;
+      case "filterTitle": this.filterTitle = status; break;
     }
   }
 
