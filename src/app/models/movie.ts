@@ -8,5 +8,6 @@ export interface Movie {
     ratings?: Rating[],
     watched: string,
     dateWatched?: Date,
+    liked?: boolean,
     id: number
   }

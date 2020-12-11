@@ -3,19 +3,13 @@
         <li class="list-group-item ">
             <div class="container">
                 <div class="row">
-                    <!-- <button type="button" class="btn btn-secondary btn-block btn-sm">Add to watched</button> -->
-
                     <div class="col-sm text-center">
-                        <button type="button" class="btn btn-outline-secondary" style="margin: 3pt">
+                        <button type="button" class="btn btn-outline-secondary" style="margin: 3pt" *ngIf="movie.watched==='notWatched'; else watched">
                             <i class="far fa-eye"><br>Watch</i>
                         </button>
-                    <!-- </div> -->
-                    <!-- <div class="col-sm text-center"> -->
-                        <button type="button" class="btn btn-outline-secondary" style="margin: 3pt">
+                        <button type="button" class="btn btn-outline-secondary" style="margin: 3pt" *ngIf="!movie.liked; else liked">
                             <i class="far fa-heart"><br>Like</i>
                         </button>
-                    <!-- </div> -->
-                    <!-- <div class="col-sm text-center"> -->
                         <button type="button" class="btn btn-outline-secondary" style="margin: 3pt">
                             <i class="fas fa-plus"><br>Add</i>
                         </button>
@@ -23,13 +17,35 @@
                 </div>
             </div>
         </li>
-        <li class="list-group-item">
-            Rate:
-            <ngb-rating [(rate)]="currentRate" [max]="5">
-                <ng-template let-fill="fill" let-index="index">
-                    <span class="star" [class.filled]="fill === 100">&#9733;</span>
-                </ng-template>
-            </ngb-rating>
-        </li>
+        <div class="col-sm text-center">
+
+            <li class="list-group-item">
+                Troy Rating:
+                <ngb-rating [(rate)]="troyRate" [max]="5">
+                    <ng-template let-fill="fill" let-index="index">
+                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                    </ng-template>
+                </ngb-rating>
+                <br>
+                Al Rating:
+                <ngb-rating [(rate)]="alRate" [max]="5">
+                    <ng-template let-fill="fill" let-index="index">
+                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                    </ng-template>
+                </ngb-rating>
+            </li>
+        </div>
     </ul>
 </div>
+
+<ng-template #watched>
+    <button type="button" class="btn btn-secondary" style="margin: 3pt">
+        <i class="far fa-eye"><br>Watch</i>
+    </button>
+</ng-template>
+
+<ng-template #liked>
+    <button type="button" class="btn btn-secondary" style="margin: 3pt">
+        <i class="far fa-heart"><br>Like</i>
+    </button>
+</ng-template>
