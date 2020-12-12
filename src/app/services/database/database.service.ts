@@ -26,7 +26,7 @@ export class DatabaseService {
       , budget: '$13,000,000'
       , openingWeekendUSA: '$194,308'
       , worldwideGross: '$123,922,370'
-      , tags: [{type: 'AFI100', value: 'Laughs', visible: true}, {type: 'Year', value: '1987', visible: false}]
+      , tags: ['AFI100Laughs', 'a', 'ThisIsALongTagNameToTestHowBigTagsLook', 'AnotherTag', 'AreWeOnANewLineYet?']
     },
     {
       title: 'The Nutty Professor', year: 1963, description: `A timid, nearsighted chemistry teacher discovers a magical potion that can transform him into a suave and handsome Romeo. 

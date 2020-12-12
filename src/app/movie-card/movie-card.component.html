@@ -17,9 +17,7 @@
             <div *ngIf="showTags">
                 <div *ngIf="movie.tags; else noTags">
                     <div *ngFor="let tag of movie.tags">
-                        <div *ngIf="tag.visible">
-                            <li class="list-group-item {{tag.type}}">{{tag.value}}</li>
-                        </div>
+                            <li class="list-group-item {{tag}}">{{tag}}</li>
                     </div>
                 </div>
             </div>

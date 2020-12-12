@@ -26,11 +26,11 @@
                         <h4 style="display: inline;"><b>Tags</b></h4>
                         &nbsp;<div class="badge badge-pill badge-secondary" style="display: inline;"><i class="fas fa-plus"></i></div>
                     </div>
-                    <ul class="list-group list-group-horizontal">
-                        <div *ngFor="let tag of movie.tags">
-                            <div class="list-group-item {{tag.type}}">{{tag.value}}</div>
+                    <div class="card-deck" style="margin-left: 3px; margin-top: 1rem">
+                        <div *ngFor="let tag of movie.tags" style="display: inline-block; padding: 3px">
+                            <div class="list-group-item" style="background: getRandomColor()">{{tag}}</div>
                         </div>
-                    </ul>
+                    </div>
 
                 </div>
             </div>
