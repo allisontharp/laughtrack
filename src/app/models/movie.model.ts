@@ -1,4 +1,4 @@
-import { Rating } from './rating';
+import { Rating } from './rating.model';
 
 export interface Movie {
     title: string,

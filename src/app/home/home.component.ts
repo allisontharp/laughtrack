@@ -1,6 +1,5 @@
 import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__, Input } from '@angular/core';
-import { Movie } from '../models/movie';
-import { Rating } from '../models/rating';
+import { Movie } from '../models/movie.model';
 import { DatabaseService } from '../services/database/database.service';
 
 @Component({
@@ -18,8 +17,10 @@ export class HomeComponent implements OnInit {
   ) { }
 
 
-  ngOnInit(): void {
-    this.movies = this.dbService.getMovies();
+  async ngOnInit(): Promise<void> {
+    this.movies = await this.dbService.getMovies();
+    console.log('movies')
+    console.log(this.movies)
   }
 
   setFilterStatus(filterName: string, status: any) {

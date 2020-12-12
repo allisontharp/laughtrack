@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Movie } from '../models/movie';
+import { Movie } from '../models/movie.model';
 import { ActivatedRoute } from '@angular/router';
 import { DatabaseService } from '../services/database/database.service';
 
@@ -17,10 +17,10 @@ export class MoviePageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    let id: number;
-    this.sub = this.route.params.subscribe(params => {
+    let id: string;
+    this.sub = this.route.params.subscribe(async params => {
       id = params['id'];
-      this.movie = this.dbService.getMovie(id);
+      this.movie = await this.dbService.getMovie(id);
     });
 
   }

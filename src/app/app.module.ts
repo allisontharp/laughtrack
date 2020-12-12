@@ -9,6 +9,8 @@ import { MoviePageComponent } from './movie-page/movie-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from './pipes/filter/filter.pipe';
 import { LoggerCardComponent } from './logger-card/logger-card.component';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,8 @@ import { LoggerCardComponent } from './logger-card/logger-card.component';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

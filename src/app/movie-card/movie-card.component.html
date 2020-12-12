@@ -1,5 +1,5 @@
 <div class="card border-secondary  mb-3" style="width: 20pc;">
-    <img src="{{movie.image}}" class="card-img-top" alt={{movie.title}}>
+    <a href="Movie/{{movie.title}}" class="card-title font-size: 55px"><img src="{{movie.image}}" class="card-img-top" alt={{movie.title}}></a>
     <div class="card-body">
         <h5 class="card-title font-size: 55px">
             <a href="Movie/{{movie.id}}" class="card-title font-size: 55px">{{movie.title}}</a>
@@ -16,8 +16,11 @@
         <ul class="list-group list-group-horizontal">
             <div *ngIf="showTags">
                 <div *ngIf="movie.tags; else noTags">
-                    <div *ngFor="let tag of movie.tags">
+                    <div class="card-deck" style="margin-left: 3px; margin-top: 1rem">
+
+                        <div *ngFor="let tag of movie.tags">
                             <li class="list-group-item {{tag}}">{{tag}}</li>
+                        </div>
                     </div>
                 </div>
             </div>

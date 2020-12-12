@@ -53,8 +53,8 @@
     <br><br>
     <div class="form-group">
         <label for="exampleTextarea"><b>Add Comment</b></label>
-        <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-        <button type="button" class="btn btn-secondary" style="float: right;">
+        <textarea class="form-control" id="exampleTextarea" rows="3" [(ngModel)]="str"></textarea>
+        <button type="button" class="btn btn-secondary" style="float: right;" (click)="commentSubmit()" >
             Submit
         </button>
     </div>
