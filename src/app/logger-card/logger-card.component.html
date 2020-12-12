@@ -1,8 +1,8 @@
 <div class="card-body">
     <div class="row">
         <div class="col-sm text-center">
-            <button type="button" class="btn btn-outline-secondary" style="margin: 3pt" *ngIf="movie.watched==='notWatched'; else watched">
-                <i class="far fa-eye"><br>Watch</i>
+            <button (click)="watch()" type="button" class="btn btn-outline-secondary" style="margin: 3pt" *ngIf="movie.watched==='notWatched'; else watched">
+                <i class="far fa-eye" (click)="watch()"><br>Watch</i>
             </button>
             <button type="button" class="btn btn-outline-secondary" style="margin: 3pt" *ngIf="!movie.liked; else liked">
                 <i class="far fa-heart"><br>Like</i>
@@ -15,16 +15,16 @@
     <hr>
     <div class="col-sm text-center">
         Troy Rating:
-        <ngb-rating [(rate)]="troyRate" [max]="5">
-            <ng-template let-fill="fill" let-index="index">
-                <span class="star" [class.filled]="fill === 100">&#9733;</span>
-            </ng-template>
+        <ngb-rating [(rate)]="troyRate" [max]="5" >
+            <ng-template let-fill="fill" let-index="index"  >
+                <span class="star" (click)="updateRating('Troy', index+1)" [class.filled]="fill === 100">&#9733;</span>
+            </ng-template >
         </ngb-rating>
         <br>
         Al Rating:
         <ngb-rating [(rate)]="alRate" [max]="5">
             <ng-template let-fill="fill" let-index="index">
-                <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                <span class="star" (click)="updateRating('Allison', index+1)" [class.filled]="fill === 100">&#9733;</span>
             </ng-template>
         </ngb-rating>
     </div>
@@ -54,7 +54,7 @@
     <div class="form-group">
         <label for="exampleTextarea"><b>Add Comment</b></label>
         <textarea class="form-control" id="exampleTextarea" rows="3" [(ngModel)]="str"></textarea>
-        <button type="button" class="btn btn-secondary" style="float: right;" (click)="commentSubmit()" >
+        <button type="button" class="btn btn-secondary" style="float: right;" (click)="commentSubmit()">
             Submit
         </button>
     </div>
@@ -63,7 +63,7 @@
 
 <ng-template #watched>
     <button type="button" class="btn btn-secondary" style="margin: 3pt">
-        <i class="far fa-eye"><br>Watch</i>
+        <i class="far fa-eye" (click)="watch()"><br>Watch</i>
     </button>
 </ng-template>
 

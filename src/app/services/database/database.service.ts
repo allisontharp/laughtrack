@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Movie } from 'src/app/models/movie.model';
 import { IDyanamoDb } from 'src/app/models/dynamoDb.model';
 import { ApiService } from '../api/api.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,14 @@ export class DatabaseService {
     let r = await this.apiService.getRows(this.dynamoDbRow);
     let rows = JSON.parse(r)
     return JSON.parse(rows.result[0].jsonObject)
+  }
+
+  async updateMovie(movie: Movie){
+    this.dynamoDbRow = <IDyanamoDb> {};
+    this.dynamoDbRow.pk = movie.title;
+    this.dynamoDbRow.sk = 'Movie'
+    this.dynamoDbRow.jsonObject = JSON.stringify(movie)
+
+    let r = await this.apiService.insertRow(this.dynamoDbRow)
   }
 }

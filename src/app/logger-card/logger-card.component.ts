@@ -3,6 +3,7 @@ import { Movie } from '../models/movie.model';
 import { ApiService } from '../services/api/api.service';
 import { IDyanamoDb } from '../models/dynamoDb.model';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { DatabaseService } from '../services/database/database.service';
 @Component({
   selector: 'app-logger-card',
   templateUrl: './logger-card.component.html',
@@ -17,7 +18,8 @@ export class LoggerCardComponent implements OnInit {
   dynamoDbRow: IDyanamoDb = <IDyanamoDb> {};
 
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    private databaseService: DatabaseService
   ) { }
 
   ngOnInit() {
@@ -45,6 +47,31 @@ export class LoggerCardComponent implements OnInit {
 
     // this.apiService.insertRow(this.dynamoDbRow)
 
+  }
+
+  async watch(){
+    if(this.movie.watched == undefined || this.movie.watched == 'notWatched'){
+      this.movie.watched = 'hasWatched';
+    }
+    else{
+      this.movie.watched = 'notWatched';
+    }
+
+    console.log(this.movie);
+
+    await this.databaseService.updateMovie(this.movie);
+  }
+
+  async updateRating(person: any, rating: any){
+    if(this.movie.ratings !== undefined){
+      let r = this.movie.ratings.filter((r) => r.source == person)[0];
+      r.rating = rating;
+      
+    }
+
+    console.log(this.movie);
+
+    await this.databaseService.updateMovie(this.movie);
   }
 
 
