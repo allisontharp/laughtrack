@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Movie } from '../models/movie.model';
-import { ApiService } from '../services/api/api.service';
 import { IDyanamoDb } from '../models/dynamoDb.model';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { DatabaseService } from '../services/database/database.service';
 @Component({
   selector: 'app-logger-card',
@@ -14,63 +12,61 @@ export class LoggerCardComponent implements OnInit {
   troyRate = 0;
   @Input() movie!: Movie;
   hasWatched: string | undefined;
-  str: any;
-  dynamoDbRow: IDyanamoDb = <IDyanamoDb> {};
+  comment: any;
+  dynamoDbRow: IDyanamoDb = <IDyanamoDb>{};
 
   constructor(
-    private apiService: ApiService,
     private databaseService: DatabaseService
   ) { }
 
   ngOnInit() {
-    if(this.movie.ratings !== undefined){
+    if (this.movie.ratings !== undefined) {
       let alRating = this.movie.ratings.filter((rating) => rating.source == 'Allison')
       let troyRating = this.movie.ratings.filter((rating) => rating.source == 'Troy')
-      if(alRating.length > 0){
+      if (alRating.length > 0) {
         this.alRate = alRating[0].rating;
       }
-      if(troyRating.length > 0){
+      if (troyRating.length > 0) {
         this.troyRate = troyRating[0].rating;
       }
     }
   };
 
-  async commentSubmit(){
-    // console.log(this.str)
-    // var j = JSON.stringify(this.movie)
-    // console.log(j)
-
-    // // InsertRow
-    // this.dynamoDbRow.pk = this.movie.title;
-    // this.dynamoDbRow.sk = 'Movie';
-    // this.dynamoDbRow.jsonObject = j;
-
-    // this.apiService.insertRow(this.dynamoDbRow)
-
+  async commentSubmit() {
+    if (this.comment !== undefined) {
+      if (this.movie.comments === undefined) {
+        this.movie.comments = [this.comment];
+      } else {
+        this.movie.comments.push(this.comment);
+      }
+      await this.databaseService.updateMovie(this.movie);
+    }
+    console.log(this.movie.comments);
+    this.comment = undefined;
   }
 
-  async watch(){
-    if(this.movie.watched == undefined || this.movie.watched == 'notWatched'){
+  async watch() {
+    if (this.movie.watched == undefined || this.movie.watched == 'notWatched') {
       this.movie.watched = 'hasWatched';
     }
-    else{
+    else {
       this.movie.watched = 'notWatched';
     }
-
-    console.log(this.movie);
-
     await this.databaseService.updateMovie(this.movie);
   }
 
-  async updateRating(person: any, rating: any){
-    if(this.movie.ratings !== undefined){
-      let r = this.movie.ratings.filter((r) => r.source == person)[0];
-      r.rating = rating;
-      
+  async updateRating(person: any, rating: any) {
+    if (this.movie.ratings !== undefined) {
+      let personRating = this.movie.ratings.filter((r) => r.source == person);
+      if(personRating.length > 0){
+        personRating[0].rating = rating
+      } else {
+        this.movie.ratings.push({
+          source: person,
+          rating: rating
+        })
+      }
     }
-
-    console.log(this.movie);
-
     await this.databaseService.updateMovie(this.movie);
   }
 

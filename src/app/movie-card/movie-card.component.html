@@ -2,7 +2,7 @@
     <a href="Movie/{{movie.title}}" class="card-title font-size: 55px"><img src="{{movie.image}}" class="card-img-top" alt={{movie.title}}></a>
     <div class="card-body">
         <h5 class="card-title font-size: 55px">
-            <a href="Movie/{{movie.id}}" class="card-title font-size: 55px">{{movie.title}}</a>
+            <a href="Movie/{{movie.title}}" class="card-title font-size: 55px">{{movie.title}}</a>
         </h5>
         <div>
             <h6 class="card-subtitle">
@@ -26,13 +26,13 @@
             </div>
         </ul>
         <div *ngIf="movie.watched==='notWatched'; else removeWatched">
-            <button type="button" class="btn btn-secondary btn-block btn-sm">Add to watched</button>
+            <button type="button" (click)="watch()" class="btn btn-secondary btn-block btn-sm">Add to watched</button>
         </div>
     </div>
 </div>
 
 <ng-template #removeWatched>
-    <button type="button" class="btn btn-warning btn-block btn-sm">Remove from watched</button>
+    <button type="button" (click)="watch()" class="btn btn-warning btn-block btn-sm">Remove from watched</button>
 </ng-template>
 
 <ng-template #noTags>

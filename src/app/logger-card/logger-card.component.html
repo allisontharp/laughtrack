@@ -31,29 +31,16 @@
     <hr>
     <h4><b>Comments</b></h4>
     <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 " style="max-height: 100px; ">
-        Troy really liked this one, I thought it was OK.
-        Troy really liked this one, I thought it was OK.
-        Troy really liked this one, I thought it was OK.
-        Troy really liked this one, I thought it was OK.
-        Troy really liked this one, I thought it was OK.
-        Troy really liked this one, I thought it was OK.
-        Troy really liked this one, I thought it was OK.
-        Troy really liked this one, I thought it was OK.
-        Troy really liked this one, I thought it was OK.
-        Troy really liked this one, I thought it was OK.
-        Troy really liked this one, I thought it was OK.
-        Troy really liked this one, I thought it was OK.
-        Troy really liked this one, I thought it was OK.
-        Troy really liked this one, I thought it was OK.
-        Troy really liked this one, I thought it was OK.
-        Troy really liked this one, I thought it was OK.
-        Troy really liked this one, I thought it was OK.
+        <div *ngFor="let c of movie.comments">
+            {{c}}
+        </div>
+        <!-- {{movie.comments}} -->
     </div>
 
     <br><br>
     <div class="form-group">
         <label for="exampleTextarea"><b>Add Comment</b></label>
-        <textarea class="form-control" id="exampleTextarea" rows="3" [(ngModel)]="str"></textarea>
+        <textarea class="form-control" id="exampleTextarea" rows="3" [(ngModel)]="comment"></textarea>
         <button type="button" class="btn btn-secondary" style="float: right;" (click)="commentSubmit()">
             Submit
         </button>

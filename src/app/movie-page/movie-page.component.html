@@ -24,7 +24,21 @@
                     <hr>
                     <div>
                         <h4 style="display: inline;"><b>Tags</b></h4>
-                        &nbsp;<div class="badge badge-pill badge-secondary" style="display: inline;"><i class="fas fa-plus"></i></div>
+                        &nbsp;
+                        <div class="badge badge-pill badge-secondary" (click)="addTag()" style="display: inline;">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                            &nbsp;
+                        <div style="display: inline;" *ngIf="showTag;">
+                            <div class="form-group" style="max-width: 50%;">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" [(ngModel)]="tagName">
+                                    <div class="input-group-append">
+                                        <button class="input-group-text" (click)="addTag()">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-deck" style="margin-left: 3px; margin-top: 1rem">
                         <div *ngFor="let tag of movie.tags" style="display: inline-block; padding: 3px">

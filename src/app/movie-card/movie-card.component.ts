@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Movie } from '../models/movie.model';
 import {Rating} from '../models/rating.model';
+import { DatabaseService } from '../services/database/database.service';
 
 @Component({
   selector: 'app-movie-card',
@@ -9,7 +10,9 @@ import {Rating} from '../models/rating.model';
 })
 export class MovieCardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private databaseService: DatabaseService
+  ) { }
   @Input() movie!: Movie;
   @Input() showTags: boolean = true;
   ratings: any;
@@ -20,6 +23,19 @@ export class MovieCardComponent implements OnInit {
     this.imdbRating = this.ratings.filter(function (rating: Rating) {
       return rating.source === 'IMDB';
     })[0]
+  }
+
+  async watch(){
+    if(this.movie.watched == undefined || this.movie.watched == 'notWatched'){
+      this.movie.watched = 'hasWatched';
+    }
+    else{
+      this.movie.watched = 'notWatched';
+    }
+
+    console.log(this.movie);
+
+    await this.databaseService.updateMovie(this.movie);
   }
 
 }
