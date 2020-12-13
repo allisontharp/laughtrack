@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IDyanamoDb } from 'src/app/models/dynamoDb.model';
 
@@ -23,6 +21,14 @@ export class ApiService {
   getRows(dynamoDbRow: IDyanamoDb): any{
     const url = this.apiUrl + '/getRows';
     return this.http.post(url, dynamoDbRow, {responseType: 'text'}).toPromise();
+  }
+
+  getMovieFromIMDB(title:string): any{
+    const url = this.apiUrl + '/getMovieFromIMDB';
+    let body = {
+      title: title
+    }
+    return this.http.post(url, body, {responseType: 'text'}).toPromise();
   }
 
 }

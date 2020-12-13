@@ -1,7 +1,7 @@
 <div class="card-body">
     <div class="row">
         <div class="col-sm text-center">
-            <button (click)="watch()" type="button" class="btn btn-outline-secondary" style="margin: 3pt" *ngIf="movie.watched==='notWatched'; else watched">
+            <button (click)="watch()" type="button" class="btn btn-secondary" style="margin: 3pt" *ngIf="movie.watched==='hasWatched'; else watched">
                 <i class="far fa-eye" (click)="watch()"><br>Watch</i>
             </button>
             <button type="button" class="btn btn-outline-secondary" style="margin: 3pt" *ngIf="!movie.liked; else liked">
@@ -49,8 +49,8 @@
 </div>
 
 <ng-template #watched>
-    <button type="button" class="btn btn-secondary" style="margin: 3pt">
-        <i class="far fa-eye" (click)="watch()"><br>Watch</i>
+    <button type="button" class="btn btn-outline-secondary" style="margin: 3pt">
+                <i class="far fa-eye" (click)="watch()"><br>Watch</i>
     </button>
 </ng-template>
 

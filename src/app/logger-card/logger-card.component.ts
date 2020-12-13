@@ -41,7 +41,6 @@ export class LoggerCardComponent implements OnInit {
       }
       await this.databaseService.updateMovie(this.movie);
     }
-    console.log(this.movie.comments);
     this.comment = undefined;
   }
 

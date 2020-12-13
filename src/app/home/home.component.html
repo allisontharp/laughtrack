@@ -3,8 +3,8 @@
 <div>
   <div class="jumbotron">
     <!-- Filter Bar -->
-    <div class="d-inline-block" style="margin-left: 65px;">
-      <div class="dropdown">
+    <div class="d-inline-block" style="margin-left: 65px; ">
+      <div class="dropdown" style="display: inline; margin-right:1rem">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="watchedDropDown" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           All Movies:
@@ -15,11 +15,24 @@
           <a class="dropdown-item" (click)="setFilterStatus('filterWatched', undefined)">Both</a>
         </div>
       </div>
+      <div class="dropdown" style="display: inline;">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="watchedDropDown" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Sort:
+        </button>
+        <div class="dropdown-menu border-secondary" aria-labelledby="watchedDropDown">
+          <a class="dropdown-item" (click)="setSortByName('title', 'asc')">Title: Ascending</a>
+          <a class="dropdown-item" (click)="setSortByName('title', 'desc')">Title: Descending</a>
+          <a class="dropdown-item" (click)="setSortByName('AFI100LaughsRank', 'asc')">AFI Laughs: Ascending</a>
+          <a class="dropdown-item" (click)="setSortByName('AFI100LaughsRank', 'desc')">AFI Laughs: Descending</a>
+        </div>
+      </div>
+
     </div><!-- !filterBar -->
 
     <!-- Card Stack -->
     <div class="card-deck" style="margin-left: 50px; margin-top: 25px; ">
-      <div *ngFor="let m of movies | filter:{watched: filterWatched, title: filterTitle}">
+      <div *ngFor="let m of movies | filter:{watched: filterWatched, title: filterTitle} | sort:sortDirection:sortByName">
         <app-movie-card [movie]="m"></app-movie-card>
       </div>
     </div> <!-- !cardStack -->

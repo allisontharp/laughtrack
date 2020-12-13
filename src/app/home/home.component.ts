@@ -10,6 +10,8 @@ import { DatabaseService } from '../services/database/database.service';
 export class HomeComponent implements OnInit {
   movies: Movie[] = [];
   filterWatched: string | undefined;
+  sortByName = "title";
+  sortDirection = "asc";
   @Input() filterTitle: string | undefined;
 
   constructor(
@@ -19,7 +21,6 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.movies = await this.dbService.getMovies();
-    console.log('movies')
     console.log(this.movies)
   }
 
@@ -28,6 +29,11 @@ export class HomeComponent implements OnInit {
       case "filterWatched": this.filterWatched = status; break;
       case "filterTitle": this.filterTitle = status; break;
     }
+  }
+
+  setSortByName(sortByName: string, sortByDirection: string) {
+    this.sortByName = sortByName;
+    this.sortDirection = sortByDirection;
   }
 
 }

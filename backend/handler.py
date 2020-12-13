@@ -1,5 +1,4 @@
 from DynamoFuncs import *
-from urllib.parse import unquote
 
 tableName = 'laughtrackbackend-dev-ApplicationDynamoDBTable-158G3YYV8WY3I' # aws dynamodb list-tables --region us-east-1
 
@@ -21,8 +20,8 @@ def insertRow(event, context):
 def getRows(event, context):
     print(event)
     body = json.loads(event['body'])
-    key = unquote(body['key'])
-    value = unquote(body['value'])
+    key = body['key']
+    value = body['value']
     print(key)
     print(value)
     r = getItemsFromTable(tableName, Key(key).eq(value))
@@ -37,4 +36,3 @@ def getRows(event, context):
         "body": json.dumps(body)
     }
     return response    
-

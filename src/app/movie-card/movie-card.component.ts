@@ -32,9 +32,6 @@ export class MovieCardComponent implements OnInit {
     else{
       this.movie.watched = 'notWatched';
     }
-
-    console.log(this.movie);
-
     await this.databaseService.updateMovie(this.movie);
   }
 

@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from './pipes/filter/filter.pipe';
 import { LoggerCardComponent } from './logger-card/logger-card.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SortPipe } from './pipes/sort/sort.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     MoviePageComponent,
     FilterPipe,
     LoggerCardComponent,
+    SortPipe,
   ],
   imports: [
     BrowserModule,

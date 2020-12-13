@@ -22,7 +22,9 @@ export class DatabaseService {
     let r = await this.apiService.getRows(this.dynamoDbRow);
     let rows = JSON.parse(r)
     rows.result.forEach((m: any) => {
-      this.movies.push(JSON.parse(m.jsonObject))
+      let j = JSON.parse(m.jsonObject)
+      j['AFI100LaughsRank'] = Number(j['AFI100LaughsRank'])
+      this.movies.push(j)
     });
     return this.movies;
   }

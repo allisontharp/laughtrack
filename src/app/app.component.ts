@@ -10,6 +10,5 @@ export class AppComponent {
   searchInput: any;
 
   search(event: any){
-    // console.log(this.searchInput)
   }
 }
