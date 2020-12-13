@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Movie } from 'src/app/models/movie.model';
 import { IDyanamoDb } from 'src/app/models/dynamoDb.model';
 import { ApiService } from '../api/api.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'

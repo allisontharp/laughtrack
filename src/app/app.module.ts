@@ -11,6 +11,7 @@ import { FilterPipe } from './pipes/filter/filter.pipe';
 import { LoggerCardComponent } from './logger-card/logger-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SortPipe } from './pipes/sort/sort.pipe';
+import { HeaderbarComponent } from './headerbar/headerbar.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SortPipe } from './pipes/sort/sort.pipe';
     FilterPipe,
     LoggerCardComponent,
     SortPipe,
+    HeaderbarComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from '../models/movie.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,  Router } from '@angular/router';
 import { DatabaseService } from '../services/database/database.service';
 
 @Component({
@@ -15,7 +15,8 @@ export class MoviePageComponent implements OnInit {
   tagName: string | undefined;
   constructor(
     private route: ActivatedRoute,
-    private databaseService: DatabaseService
+    private databaseService: DatabaseService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +40,9 @@ export class MoviePageComponent implements OnInit {
     this.showTag = !this.showTag;
   }
 
+  searchBar(event: any){
+    this.router.navigate([''], { queryParams: { title: event } });
+  }
 
 }
 
