@@ -29,6 +29,13 @@
         </ngb-rating>
     </div>
     <hr>
+    <h4><b>Watch History</b></h4>
+    <ul class="list-group list-group-horizontal">
+        <div *ngFor="let d of movie.dateWatched">
+            <span class="badge badge-pill badge-secondary">{{d | date: 'shortDate'}}</span>
+        </div>
+    </ul>
+    <hr>
     <h4><b>Comments</b></h4>
     <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 " style="max-height: 100px; ">
         <div *ngFor="let c of movie.comments">
@@ -45,7 +52,7 @@
             <label for="exampleTextarea" style="display: inline"><b>Add Comment</b>
                 <div class="dropdown" style="float: right;">
                     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="commentDropdown"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Comment As:
                     </button>
                     <div class="dropdown-menu border-secondary" aria-labelledby="commentDropdown">
@@ -53,7 +60,7 @@
                         <a class="dropdown-item" (click)="setCommentAs('Troy')">Troy</a>
                     </div>
                 </div>
-                
+
             </label>
         </div>
 

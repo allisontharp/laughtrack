@@ -3,6 +3,8 @@ import { Movie } from '../models/movie.model';
 import { IDyanamoDb } from '../models/dynamoDb.model';
 import { DatabaseService } from '../services/database/database.service';
 import {formatDate} from '@angular/common';
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-logger-card',
   templateUrl: './logger-card.component.html',

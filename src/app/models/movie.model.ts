@@ -7,7 +7,7 @@ export interface Movie {
     image?: string,
     ratings?: Rating[],
     watched: string,
-    dateWatched?: Date,
+    dateWatched?: Date[],
     liked?: boolean,
     id: number,
     director?: string,
@@ -18,7 +18,6 @@ export interface Movie {
     genres?: string,
     budget?: string,
     openingWeekendUSA?: string,
-    worldwideGross?: string
     tags?: string[],
     comments?: string[]
   }
