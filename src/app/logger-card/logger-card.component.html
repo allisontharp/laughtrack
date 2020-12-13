@@ -15,10 +15,10 @@
     <hr>
     <div class="col-sm text-center">
         Troy Rating:
-        <ngb-rating [(rate)]="troyRate" [max]="5" >
-            <ng-template let-fill="fill" let-index="index"  >
+        <ngb-rating [(rate)]="troyRate" [max]="5">
+            <ng-template let-fill="fill" let-index="index">
                 <span class="star" (click)="updateRating('Troy', index+1)" [class.filled]="fill === 100">&#9733;</span>
-            </ng-template >
+            </ng-template>
         </ngb-rating>
         <br>
         Al Rating:
@@ -39,7 +39,22 @@
 
     <br><br>
     <div class="form-group">
-        <label for="exampleTextarea"><b>Add Comment</b></label>
+        <div style="display: inline">
+
+            <label for="exampleTextarea" style="display: inline"><b>Add Comment</b>
+                <div class="dropdown" style="float: right;">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="commentDropdown"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        Comment As:
+                    </button>
+                    <div class="dropdown-menu border-secondary" aria-labelledby="commentDropdown">
+                        <a class="dropdown-item">Allison</a>
+                        <a class="dropdown-item">Troy</a>
+                    </div>
+                </div>
+            </label>
+        </div>
+
         <textarea class="form-control" id="exampleTextarea" rows="3" [(ngModel)]="comment"></textarea>
         <button type="button" class="btn btn-secondary" style="float: right;" (click)="commentSubmit()">
             Submit
@@ -50,7 +65,7 @@
 
 <ng-template #watched>
     <button type="button" class="btn btn-outline-secondary" style="margin: 3pt">
-                <i class="far fa-eye" (click)="watch()"><br>Watch</i>
+        <i class="far fa-eye" (click)="watch()"><br>Watch</i>
     </button>
 </ng-template>
 
