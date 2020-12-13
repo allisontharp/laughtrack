@@ -5,7 +5,7 @@
 <div>
   <div class="jumbotron">
     <!-- Filter Bar -->
-    <div class="d-inline-block" style="margin-left: 65px; ">
+    <div class="d-inline-block" style="margin-bottom: 1%; ">
       <div class="dropdown" style="display: inline; margin-right:1rem">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="watchedDropDown" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
@@ -33,7 +33,7 @@
     </div><!-- !filterBar -->
 
     <!-- Card Stack -->
-    <div class="card-deck" style="margin-left: 50px; margin-top: 25px; ">
+    <div class="card-deck" style="justify-content: center">
       <div *ngFor="let m of movies | filter:{watched: filterWatched, title: filterTitle} | sort:sortDirection:sortByName">
         <app-movie-card [movie]="m"></app-movie-card>
       </div>

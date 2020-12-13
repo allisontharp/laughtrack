@@ -5,8 +5,8 @@
 <br>
 <div>
     <div class="jumbotron">
-        <div class="card-deck" style=" margin-top: 25px;">
-            <app-movie-card [movie]="movie" [showTags]="false"></app-movie-card>
+        <div class="card-deck" >
+            <app-movie-card [movie]="movie" [showTags]="false" class="d-flex align-items-stretch" ></app-movie-card>
 
             <!-- Description -->
             <div class="card border-secondary  mb-3">
@@ -53,7 +53,7 @@
             </div>
 
             <!-- Logger -->
-            <div class="card border-secondary mb-3" style="max-width: 25%">
+            <div class="card border-secondary mb-3" >
                 <app-logger-card [movie]="movie"></app-logger-card>
             </div>
         </div>
