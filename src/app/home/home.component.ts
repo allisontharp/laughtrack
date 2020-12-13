@@ -10,12 +10,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   movies: Movie[] = [];
-  filterWatched: string | undefined;
   sortByName = "title";
   sortDirection = "asc";
   data: any
   private sub: any;
   @Input() filterTitle: string | undefined;
+  @Input() filterYear: string | undefined;
+  @Input() filterWatched: string | undefined;
 
   constructor(
     private dbService: DatabaseService,
@@ -24,7 +25,9 @@ export class HomeComponent implements OnInit {
     this.sub = this.route.queryParams.subscribe(async params => {
       this.data = params;
       if(params !== undefined){
-        this.filterTitle = params['title']
+        this.filterTitle = params['title'];
+        this.filterYear = params['year'];
+        this.filterWatched = params['watched']
       }
     });
 

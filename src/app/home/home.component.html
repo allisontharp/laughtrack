@@ -34,7 +34,7 @@
 
     <!-- Card Stack -->
     <div class="card-deck" style="justify-content: center">
-      <div *ngFor="let m of movies | filter:{watched: filterWatched, title: filterTitle} | sort:sortDirection:sortByName">
+      <div *ngFor="let m of movies | filter:{watched: filterWatched, title: filterTitle, year: filterYear} | sort:sortDirection:sortByName">
         <app-movie-card [movie]="m"></app-movie-card>
       </div>
     </div> <!-- !cardStack -->

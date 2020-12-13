@@ -40,8 +40,15 @@ export class MoviePageComponent implements OnInit {
     this.showTag = !this.showTag;
   }
 
-  searchBar(event: any){
-    this.router.navigate([''], { queryParams: { title: event } });
+  searchBar(searchText: string){
+    console.log(event)
+    let param = '';
+    if(searchText.includes(':')){
+      param = searchText
+    } else {
+      param = `title: ${searchText}`
+    }
+    this.router.navigate([''], { queryParams: { title: 'day', year: '1937' } });
   }
 
 }
