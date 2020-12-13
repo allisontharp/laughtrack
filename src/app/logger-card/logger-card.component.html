@@ -29,10 +29,30 @@
         </ngb-rating>
     </div>
     <hr>
-    <h4><b>Watch History</b></h4>
+    <div>
+        <h4 style="display: inline;"><b>Watch History</b></h4>
+        &nbsp;
+        <div class="badge badge-pill badge-secondary" (click)="addWatchHistory()" >
+            <i class="fas fa-plus"></i>
+        </div>
+        &nbsp;
+        <div style="display: inline;" *ngIf="showAddHistory;">
+            <div class="form-group" style="max-width: 50%;">
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <input class="form-control" [(ngModel)]="addWatchHistoryDate" name="addWatchHistoryDate"
+                            placeholder="YYY-MM-DD" type="date" />
+                        <div class="input-group-append">
+                            <button class="input-group-text" (click)="addWatchHistory()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <ul class="list-group list-group-horizontal">
         <div *ngFor="let d of movie.dateWatched">
-            <span class="badge badge-pill badge-secondary">{{d | date: 'shortDate'}}</span>
+            <span class="badge badge-pill badge-secondary" (click)="removeDateWatched(d)">{{d | date: 'yyyy-MM-dd'}}</span>
         </div>
     </ul>
     <hr>

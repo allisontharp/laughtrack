@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Movie } from '../models/movie.model';
 import { IDyanamoDb } from '../models/dynamoDb.model';
 import { DatabaseService } from '../services/database/database.service';
-import {formatDate} from '@angular/common';
-import { DatePipe } from '@angular/common';
+import { formatDate } from '@angular/common';
+// import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-logger-card',
@@ -18,6 +18,9 @@ export class LoggerCardComponent implements OnInit {
   comment: any;
   commenter: string = '';
   dynamoDbRow: IDyanamoDb = <IDyanamoDb>{};
+  addWatchHistoryDate: Date | undefined;
+  showAddHistory = false;
+
 
   constructor(
     private databaseService: DatabaseService
@@ -38,8 +41,8 @@ export class LoggerCardComponent implements OnInit {
 
   async commentSubmit() {
     if (this.comment !== undefined) {
-      let c =''
-      if(this.commenter !== ''){
+      let c = ''
+      if (this.commenter !== '') {
         c = `${this.commenter} - `
       }
       let today = Date.now()
@@ -55,11 +58,19 @@ export class LoggerCardComponent implements OnInit {
   }
 
   async watch() {
+    console.log('watch')
     if (this.movie.watched == undefined || this.movie.watched == 'notWatched') {
       this.movie.watched = 'hasWatched';
+      if (this.movie.dateWatched === undefined) {
+        this.movie.dateWatched = [new Date()]
+      }
+      else {
+        this.movie.dateWatched.push(new Date()); // this shouldnt happen bc there shouldnt be dates if the status is not 'hasWatched' but just in case
+      }
     }
     else {
       this.movie.watched = 'notWatched';
+      this.movie.dateWatched = [];
     }
     await this.databaseService.updateMovie(this.movie);
   }
@@ -67,7 +78,7 @@ export class LoggerCardComponent implements OnInit {
   async updateRating(person: any, rating: any) {
     if (this.movie.ratings !== undefined) {
       let personRating = this.movie.ratings.filter((r) => r.source == person);
-      if(personRating.length > 0){
+      if (personRating.length > 0) {
         personRating[0].rating = rating
       } else {
         this.movie.ratings.push({
@@ -79,8 +90,38 @@ export class LoggerCardComponent implements OnInit {
     await this.databaseService.updateMovie(this.movie);
   }
 
-  setCommentAs(commenter: string){
+  setCommentAs(commenter: string) {
     this.commenter = commenter;
+  }
+
+  async addWatchHistory() {
+    if (this.addWatchHistoryDate !== undefined) {
+      if (this.movie.dateWatched == undefined) {
+        this.movie.dateWatched = [this.addWatchHistoryDate]
+      } else {
+        this.movie.dateWatched.push(this.addWatchHistoryDate)
+      }
+      this.movie.dateWatched = this.movie.dateWatched.filter((item, i, ar) => ar.indexOf(item) == i); // Remove dupes
+      console.log(this.movie.watched)
+      if(this.movie.watched === undefined || this.movie.watched == 'NotWatched'){
+        this.movie.watched = 'hasWatched';
+      }
+      console.log(this.movie.watched)
+      await this.databaseService.updateMovie(this.movie);
+    }
+    this.showAddHistory = !this.showAddHistory;
+  }
+
+  async removeDateWatched(date: any){
+    console.log(date)
+    if(this.movie.dateWatched !== undefined){
+      this.movie.dateWatched = this.movie.dateWatched.filter((item) => item != date);
+      console.log(this.movie.dateWatched)
+      if(this.movie.dateWatched.length == 0){
+        this.movie.watched = 'NotWatched';
+      }
+      await this.databaseService.updateMovie(this.movie);
+    }
   }
 
 

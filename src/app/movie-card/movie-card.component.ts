@@ -26,11 +26,18 @@ export class MovieCardComponent implements OnInit {
   }
 
   async watch(){
-    if(this.movie.watched == undefined || this.movie.watched == 'notWatched'){
+    if (this.movie.watched == undefined || this.movie.watched == 'notWatched') {
       this.movie.watched = 'hasWatched';
+      if (this.movie.dateWatched === undefined) {
+        this.movie.dateWatched = [new Date()]
+      }
+      else {
+        this.movie.dateWatched.push(new Date()); // this shouldnt happen bc there shouldnt be dates if the status is not 'hasWatched' but just in case
+      }
     }
-    else{
+    else {
       this.movie.watched = 'notWatched';
+      this.movie.dateWatched = [];
     }
     await this.databaseService.updateMovie(this.movie);
   }
