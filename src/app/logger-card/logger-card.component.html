@@ -33,6 +33,7 @@
     <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 " style="max-height: 100px; ">
         <div *ngFor="let c of movie.comments">
             {{c}}
+            <hr>
         </div>
         <!-- {{movie.comments}} -->
     </div>
@@ -48,10 +49,11 @@
                         Comment As:
                     </button>
                     <div class="dropdown-menu border-secondary" aria-labelledby="commentDropdown">
-                        <a class="dropdown-item">Allison</a>
-                        <a class="dropdown-item">Troy</a>
+                        <a class="dropdown-item" (click)="setCommentAs('Allison')">Allison</a>
+                        <a class="dropdown-item" (click)="setCommentAs('Troy')">Troy</a>
                     </div>
                 </div>
+                
             </label>
         </div>
 

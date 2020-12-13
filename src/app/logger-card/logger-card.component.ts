@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Movie } from '../models/movie.model';
 import { IDyanamoDb } from '../models/dynamoDb.model';
 import { DatabaseService } from '../services/database/database.service';
+import {formatDate} from '@angular/common';
 @Component({
   selector: 'app-logger-card',
   templateUrl: './logger-card.component.html',
@@ -13,6 +14,7 @@ export class LoggerCardComponent implements OnInit {
   @Input() movie!: Movie;
   hasWatched: string | undefined;
   comment: any;
+  commenter: string = '';
   dynamoDbRow: IDyanamoDb = <IDyanamoDb>{};
 
   constructor(
@@ -34,6 +36,12 @@ export class LoggerCardComponent implements OnInit {
 
   async commentSubmit() {
     if (this.comment !== undefined) {
+      let c =''
+      if(this.commenter !== ''){
+        c = `${this.commenter} - `
+      }
+      let today = Date.now()
+      this.comment = `${c}${formatDate(new Date(), 'yyyy/MM/dd', 'en')} - ${this.comment}`
       if (this.movie.comments === undefined) {
         this.movie.comments = [this.comment];
       } else {
@@ -67,6 +75,10 @@ export class LoggerCardComponent implements OnInit {
       }
     }
     await this.databaseService.updateMovie(this.movie);
+  }
+
+  setCommentAs(commenter: string){
+    this.commenter = commenter;
   }
 
 
