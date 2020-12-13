@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from '../models/movie.model';
-import { ActivatedRoute,  Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DatabaseService } from '../services/database/database.service';
 
 @Component({
@@ -40,15 +40,23 @@ export class MoviePageComponent implements OnInit {
     this.showTag = !this.showTag;
   }
 
-  searchBar(searchText: string){
-    console.log(event)
-    let param = '';
-    if(searchText.includes(':')){
-      param = searchText
-    } else {
-      param = `title: ${searchText}`
+  searchBar(searchText: string) {
+    let regex = /\w+:.*?(?=\s+\w+:|$)/g
+    var objMatch = regex.exec(searchText);
+    var arr = new Array();
+    
+    let params: {[k: string]: any} = {};
+    let pair = [];
+    while (objMatch != null) {
+      arr[arr.length] = objMatch[0];
+      objMatch = regex.exec(searchText);
     }
-    this.router.navigate([''], { queryParams: { title: 'day', year: '1937' } });
+    for (var i = 0; i < arr.length; i++) {
+      pair = arr[i].split(':')
+      params[pair[0]] = pair[1];
+    }
+
+    this.router.navigate([''], { queryParams: params });
   }
 
 }

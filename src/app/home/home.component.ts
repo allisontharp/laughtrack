@@ -21,10 +21,10 @@ export class HomeComponent implements OnInit {
   constructor(
     private dbService: DatabaseService,
     private route: ActivatedRoute,
-  ) { 
+  ) {
     this.sub = this.route.queryParams.subscribe(async params => {
       this.data = params;
-      if(params !== undefined){
+      if (params !== undefined) {
         this.filterTitle = params['title'];
         this.filterYear = params['year'];
         this.filterWatched = params['watched']
@@ -51,8 +51,28 @@ export class HomeComponent implements OnInit {
     this.sortDirection = sortByDirection;
   }
 
-  searchBar(event: any){
-    this.filterTitle = event;
+  searchBar(searchText: any) {
+    // this.filterTitle = event;
+    let regex = /\w+:.*?(?=\s+\w+:|$)/g
+    var objMatch = regex.exec(searchText);
+    var arr = new Array();
+
+    let params: { [k: string]: any } = {};
+    let pair = [];
+    while (objMatch != null) {
+      arr[arr.length] = objMatch[0];
+      objMatch = regex.exec(searchText);
+    }
+    for (var i = 0; i < arr.length; i++) {
+      pair = arr[i].split(':')
+      params[pair[0]] = pair[1];
+    }
+
+    if (params !== undefined) {
+      this.filterTitle = params['title'];
+      this.filterYear = params['year'];
+      this.filterWatched = params['watched']
+    }
   }
 
 }
