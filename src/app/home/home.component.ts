@@ -10,8 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   movies: Movie[] = [];
-  sortByName = "title";
-  sortDirection = "asc";
+  sortByName = "AFI100LaughsRank";
+  sortDirection = "desc";
   data: any
   private sub: any;
   @Input() filterTitle: string | undefined;
@@ -37,6 +37,9 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.movies = await this.dbService.getMovies();
+    if(this.filterWatched === undefined){
+      this.filterWatched = "notWatched"
+    }
   }
 
   setFilterStatus(filterName: string, status: any) {

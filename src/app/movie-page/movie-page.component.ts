@@ -13,6 +13,7 @@ export class MoviePageComponent implements OnInit {
   movie!: Movie;
   showTag = false;
   tagName: string | undefined;
+  wikipediaURL: string | undefined;
   constructor(
     private route: ActivatedRoute,
     private databaseService: DatabaseService,
@@ -24,6 +25,7 @@ export class MoviePageComponent implements OnInit {
     this.sub = this.route.params.subscribe(async params => {
       id = params['id'];
       this.movie = await this.databaseService.getMovie(id);
+      this.wikipediaURL = this.movie.title.replace(' ', '_')
     });
   }
 

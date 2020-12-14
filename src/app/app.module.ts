@@ -12,6 +12,7 @@ import { LoggerCardComponent } from './logger-card/logger-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SortPipe } from './pipes/sort/sort.pipe';
 import { HeaderbarComponent } from './headerbar/headerbar.component';
+import { ReportsPageComponent } from './reports-page/reports-page.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HeaderbarComponent } from './headerbar/headerbar.component';
     LoggerCardComponent,
     SortPipe,
     HeaderbarComponent,
+    ReportsPageComponent,
   ],
   imports: [
     BrowserModule,
