@@ -5,19 +5,27 @@
 <br>
 <div>
     <div class="jumbotron">
-        <div class="card-deck" >
-            <app-movie-card [movie]="movie" [showTags]="false" class="d-flex align-items-stretch" ></app-movie-card>
+        <div class="card-deck">
+            <app-movie-card [movie]="movie" [showTags]="false" class="d-flex align-items-stretch"></app-movie-card>
 
             <!-- Description -->
             <div class="card border-secondary  mb-3">
                 <div class="card-body">
                     {{movie.description}}
                     <hr>
-                    <b>Director:</b> {{movie.director}}
-                    <br><b>Writer:</b> {{movie.writer}}
-                    <br><b>Stars:</b> {{movie.stars}}
-                    <br><b>Runtime:</b> {{movie.runtime}}
-                    <br><b>Release Date:</b> {{movie.releaseDate}}
+                    <b>Director: </b><a href="/?director={{movie.director}}">{{movie.director}}</a>
+                    <br>
+                    <b>Writers: </b>
+                    <div *ngFor="let w of movie.writer" style="display: inline">
+                            <a href="/?writer={{w}}">{{w}}</a>&nbsp;
+                        </div>
+                    <br>
+                    <b>Stars: </b>
+                    <div *ngFor="let s of movie.stars" style="display: inline">
+                        <a href="/?stars={{s}}">{{s}}</a>&nbsp;
+                    </div>
+                    <br><b>Runtime:</b>&nbsp;{{movie.runtime}}
+                    <br><b>Release Date:</b>&nbsp;{{movie.releaseDate}}
                     <!-- <br><b>Genres:</b> {{movie.genres}} -->
                     <br>
                     <b>Genres: </b>
@@ -37,7 +45,7 @@
                         <div class="badge badge-pill badge-secondary" (click)="addTag()">
                             <i class="fas fa-plus"></i>
                         </div>
-                            &nbsp;
+                        &nbsp;
                         <div style="display: inline;" *ngIf="showTag;">
                             <div class="form-group" style="max-width: 50%;">
                                 <div class="input-group mb-3">
@@ -59,7 +67,7 @@
             </div>
 
             <!-- Logger -->
-            <div class="card border-secondary mb-3" >
+            <div class="card border-secondary mb-3">
                 <app-logger-card [movie]="movie"></app-logger-card>
             </div>
         </div>
