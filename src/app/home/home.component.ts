@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   @Input() filterTitle: string | undefined;
   @Input() filterYear: string | undefined;
   @Input() filterWatched: string | undefined;
+  @Input() filterGenres: any;
 
   constructor(
     private dbService: DatabaseService,
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit {
         this.filterTitle = params['title'];
         this.filterYear = params['year'];
         this.filterWatched = params['watched']
+        this.filterGenres = params['genres']
       }
     });
 
@@ -74,7 +76,8 @@ export class HomeComponent implements OnInit {
     if (params !== undefined) {
       this.filterTitle = params['title'];
       this.filterYear = params['year'];
-      this.filterWatched = params['watched']
+      this.filterWatched = params['watched'];
+      this.filterGenres = params['genres'];
     }
   }
 

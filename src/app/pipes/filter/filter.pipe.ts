@@ -3,6 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'filter'
 }) export class FilterPipe implements PipeTransform {
   transform(items: any, filter: any): any {
+    console.log(filter)
     if (filter && Array.isArray(items)) {
       let filterKeys = Object.keys(filter);
       return items.filter((item) => {

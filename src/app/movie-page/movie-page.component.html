@@ -18,7 +18,12 @@
                     <br><b>Stars:</b> {{movie.stars}}
                     <br><b>Runtime:</b> {{movie.runtime}}
                     <br><b>Release Date:</b> {{movie.releaseDate}}
-                    <br><b>Genres:</b> {{movie.genres}}
+                    <!-- <br><b>Genres:</b> {{movie.genres}} -->
+                    <br>
+                    <b>Genres: </b>
+                    <div *ngFor="let g of movie.genres" style="display: inline">
+                        <a href="/?genres={{g}}">{{g}}</a>&nbsp;
+                    </div>
                     <br><a href="https://en.wikipedia.org/wiki/{{wikipediaURL}}"><i class="fab fa-wikipedia-w"></i></a>
                     &nbsp;<a href="https://www.imdb.com/title/tt{{movie.id}}"><i class="fab fa-imdb"></i></a>
                     <hr>
