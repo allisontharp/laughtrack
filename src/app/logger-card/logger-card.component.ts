@@ -58,7 +58,6 @@ export class LoggerCardComponent implements OnInit {
   }
 
   async watch() {
-    console.log('watch')
     if (this.movie.watched == undefined || this.movie.watched == 'notWatched') {
       this.movie.watched = 'hasWatched';
       if (this.movie.dateWatched === undefined) {
@@ -102,21 +101,17 @@ export class LoggerCardComponent implements OnInit {
         this.movie.dateWatched.push(this.addWatchHistoryDate)
       }
       this.movie.dateWatched = this.movie.dateWatched.filter((item, i, ar) => ar.indexOf(item) == i); // Remove dupes
-      console.log(this.movie.watched)
       if(this.movie.watched === undefined || this.movie.watched == 'NotWatched'){
         this.movie.watched = 'hasWatched';
       }
-      console.log(this.movie.watched)
       await this.databaseService.updateMovie(this.movie);
     }
     this.showAddHistory = !this.showAddHistory;
   }
 
   async removeDateWatched(date: any){
-    console.log(date)
     if(this.movie.dateWatched !== undefined){
       this.movie.dateWatched = this.movie.dateWatched.filter((item) => item != date);
-      console.log(this.movie.dateWatched)
       if(this.movie.dateWatched.length == 0){
         this.movie.watched = 'NotWatched';
       }

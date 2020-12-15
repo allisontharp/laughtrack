@@ -62,10 +62,15 @@ export class HomeComponent implements OnInit {
   }
 
   searchBar(searchText: any) {
-    // this.filterTitle = event;
+    // Split into keyvalue pairs (title:<title> year:<year>])
     let regex = /\w+:.*?(?=\s+\w+:|$)/g
     var objMatch = regex.exec(searchText);
     var arr = new Array();
+
+    if(searchText !== undefined && objMatch === null){ // search didnt include :
+      this.filterTitle = searchText;
+      return
+    }
 
     let params: { [k: string]: any } = {};
     let pair = [];
@@ -86,7 +91,7 @@ export class HomeComponent implements OnInit {
       this.filterDirector = params['director'];
       this.filterWriter = params['writer'];
       this.filterStars = params['stars'];
-    }
+    } 
   }
 
 }
