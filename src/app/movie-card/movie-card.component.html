@@ -1,6 +1,10 @@
-<div class="card border-secondary  mb-3" style="max-width: 20pc;">
-    <a href="Movie/{{movie.title}}" class="card-title font-size: 55px"><img src="{{movie.image}}" class="card-img-top"
-            alt={{movie.title}}></a>
+<div class="card border-secondary  mb-3" style="max-width: 20rem;">
+    <div style="width:20rem;height:30rem;overflow:hidden;">
+        <a href="Movie/{{movie.title}}" class="card-title font-size: 55px">
+            <img style="width:100%;height:auto;" src="{{movie.image}}"  class="card-img-top" alt={{movie.title}}/>
+        </a>
+    </div>
+
     <div class="card-body">
         <h5 class="card-title font-size: 55px">
             <a href="Movie/{{movie.title}}" class="card-title font-size: 55px">{{movie.title}}</a>
@@ -27,7 +31,8 @@
             </div>
         </ul>
         <div *ngIf="movie.watched==='hasWatched'; else removeWatched">
-            <button type="button" (click)="watch()" class="btn btn-warning btn-block btn-sm">Remove from watched</button>
+            <button type="button" (click)="watch()" class="btn btn-warning btn-block btn-sm">Remove from
+                watched</button>
         </div>
     </div>
 </div>
