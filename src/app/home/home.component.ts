@@ -14,13 +14,13 @@ export class HomeComponent implements OnInit {
   sortDirection = "desc";
   data: any
   private sub: any;
-  @Input() filterTitle: string | undefined;
-  @Input() filterYear: string | undefined;
-  @Input() filterWatched: string | undefined;
-  @Input() filterGenres: any;
-  @Input() filterDirector: any;
-  @Input() filterWriter: any;
-  @Input() filterStars: any;
+  filterTitle: string | undefined;
+  filterYear: string | undefined;
+  filterWatched: string | undefined;
+  filterGenres: any;
+  filterDirector: any;
+  filterWriter: any;
+  filterStars: any;
 
   constructor(
     private dbService: DatabaseService,

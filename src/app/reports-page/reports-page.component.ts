@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Movie } from '../models/movie.model';
+import { DatabaseService } from '../services/database/database.service';
 
 @Component({
   selector: 'app-reports-page',
@@ -7,13 +9,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./reports-page.component.css']
 })
 export class ReportsPageComponent implements OnInit {
+  totalMoviesWatched: Number | undefined;
+  movies: Movie[] | undefined;
 
   constructor(
+    private dbService: DatabaseService,
     private router: Router
 
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.movies = await this.dbService.getMovies();
+
   }
 
   searchBar(searchText: string) {
@@ -34,5 +41,6 @@ export class ReportsPageComponent implements OnInit {
 
     this.router.navigate([''], { queryParams: params });
   }
+
 
 }
