@@ -94,4 +94,14 @@ export class HomeComponent implements OnInit {
     } 
   }
 
+  clearFilters(){
+    this.filterTitle = undefined;
+    this.filterYear = undefined;
+    this.filterWatched = undefined;
+    this.filterGenres = undefined;
+    this.filterDirector = undefined;
+    this.filterWriter = undefined;
+    this.filterStars = undefined;
+  }
+
 }

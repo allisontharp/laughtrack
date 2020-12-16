@@ -16,6 +16,8 @@ export class HeaderbarComponent implements OnInit {
 
 
   search(event: any){
+    console.log(event)
+    console.log(this.searchInput)
     this.newItemEvent.emit(this.searchInput);
   }
 }

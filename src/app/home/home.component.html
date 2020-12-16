@@ -29,11 +29,12 @@
           <a class="dropdown-item" (click)="setSortByName('AFI100LaughsRank', 'desc')">AFI Laughs: Descending</a>
         </div>
       </div>
+      <button class="btn btn-outline-secondary" style="margin-left: 1rem;" (click)="clearFilters()">Clear</button>
 
     </div><!-- !filterBar -->
 
     <!-- Card Stack -->
-    <div class="card-deck" style="justify-content: center">
+    <div class="card-deck" style="justify-content: left">
       <div *ngFor="let m of movies | filter:{watched: filterWatched, title: filterTitle, year: filterYear, genres: filterGenres, director: filterDirector, writer: filterWriter, stars: filterStars} 
       | sort:sortDirection:sortByName">
         <app-movie-card [movie]="m"></app-movie-card>
