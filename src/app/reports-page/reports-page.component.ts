@@ -9,8 +9,10 @@ import { DatabaseService } from '../services/database/database.service';
   styleUrls: ['./reports-page.component.css']
 })
 export class ReportsPageComponent implements OnInit {
-  totalMoviesWatched: Number | undefined;
   movies: Movie[] | undefined;
+  watchedMovies: Movie[] | undefined;
+  totalMoviesWatched: Number | undefined;
+  totalTimeWatched: {[k: string]: any} = {};
 
   constructor(
     private dbService: DatabaseService,
@@ -20,7 +22,13 @@ export class ReportsPageComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.movies = await this.dbService.getMovies();
-
+    if(this.movies !== undefined){
+      this.watchedMovies = this.movies?.filter((m) => m.watched == 'hasWatched');
+      this.totalMoviesWatched = this.watchedMovies.length;
+      this.totalTimeWatched.minutes = this.watchedMovies.map(r => r.runtime?Number(r.runtime):0).reduce((acc, cur) => acc+cur)
+      this.totalTimeWatched.hours = (this.totalTimeWatched.minutes/60).toFixed(2)
+      
+    }
   }
 
   searchBar(searchText: string) {
@@ -41,6 +49,7 @@ export class ReportsPageComponent implements OnInit {
 
     this.router.navigate([''], { queryParams: params });
   }
+
 
 
 }
