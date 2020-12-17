@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SortPipe } from './pipes/sort/sort.pipe';
 import { HeaderbarComponent } from './headerbar/headerbar.component';
 import { ReportsPageComponent } from './reports-page/reports-page.component';
+import { AddmovieComponent } from './addmovie/addmovie.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ReportsPageComponent } from './reports-page/reports-page.component';
     SortPipe,
     HeaderbarComponent,
     ReportsPageComponent,
+    AddmovieComponent,
   ],
   imports: [
     BrowserModule,

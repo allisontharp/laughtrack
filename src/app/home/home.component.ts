@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
   filterDirector: any;
   filterWriter: any;
   filterStars: any;
+  filterCategory: any;
+  filterTags: any;
 
   constructor(
     private dbService: DatabaseService,
@@ -36,6 +38,7 @@ export class HomeComponent implements OnInit {
         this.filterDirector = params['director']
         this.filterWriter = params['writer']
         this.filterStars = params['stars']
+        this.filterTags = params['tags']
       }
     });
 
@@ -44,9 +47,10 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.movies = await this.dbService.getMovies();
-    if(this.filterWatched === undefined){
+    if (this.filterWatched === undefined) {
       this.filterWatched = "notWatched"
     }
+    console.log(this.movies)
   }
 
   setFilterStatus(filterName: string, status: any) {
@@ -59,6 +63,13 @@ export class HomeComponent implements OnInit {
   setSortByName(sortByName: string, sortByDirection: string) {
     this.sortByName = sortByName;
     this.sortDirection = sortByDirection;
+    if(this.sortByName == 'AFI100LaughsRank'){
+      this.filterTags = 'AFI100Laughs'
+    }
+  }
+
+  setCategoryName(categoryName: any){
+    this.filterTags = categoryName;
   }
 
   searchBar(searchText: any) {
@@ -67,7 +78,7 @@ export class HomeComponent implements OnInit {
     var objMatch = regex.exec(searchText);
     var arr = new Array();
 
-    if(searchText !== undefined && objMatch === null){ // search didnt include :
+    if (searchText !== undefined && objMatch === null) { // search didnt include :
       this.filterTitle = searchText;
       return
     }
@@ -90,11 +101,12 @@ export class HomeComponent implements OnInit {
       this.filterGenres = params['genres'];
       this.filterDirector = params['director'];
       this.filterWriter = params['writer'];
+      this.filterTags = params['tags']
       this.filterStars = params['stars'];
-    } 
+    }
   }
 
-  clearFilters(){
+  clearFilters() {
     this.filterTitle = undefined;
     this.filterYear = undefined;
     this.filterWatched = undefined;
@@ -102,6 +114,7 @@ export class HomeComponent implements OnInit {
     this.filterDirector = undefined;
     this.filterWriter = undefined;
     this.filterStars = undefined;
+    this.filterTags = undefined;
   }
 
 }

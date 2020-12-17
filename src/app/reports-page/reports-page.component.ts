@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Movie } from '../models/movie.model';
 import { DatabaseService } from '../services/database/database.service';
+import { SearchbarService } from '../services/searchbar/searchbar.service';
 
 @Component({
   selector: 'app-reports-page',
@@ -16,7 +16,7 @@ export class ReportsPageComponent implements OnInit {
 
   constructor(
     private dbService: DatabaseService,
-    private router: Router
+    private sb: SearchbarService
 
   ) { }
 
@@ -32,22 +32,7 @@ export class ReportsPageComponent implements OnInit {
   }
 
   searchBar(searchText: string) {
-    let regex = /\w+:.*?(?=\s+\w+:|$)/g
-    var objMatch = regex.exec(searchText);
-    var arr = new Array();
-    
-    let params: {[k: string]: any} = {};
-    let pair = [];
-    while (objMatch != null) {
-      arr[arr.length] = objMatch[0];
-      objMatch = regex.exec(searchText);
-    }
-    for (var i = 0; i < arr.length; i++) {
-      pair = arr[i].split(':')
-      params[pair[0]] = pair[1];
-    }
-
-    this.router.navigate([''], { queryParams: params });
+    this.sb.searchBar(searchText)
   }
 
 
