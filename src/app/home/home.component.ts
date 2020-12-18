@@ -25,6 +25,8 @@ export class HomeComponent implements OnInit {
   filterTags: any;
   excludeTags: any = '';
 
+  uniqueTags: any;
+
   constructor(
     private dbService: DatabaseService,
     private route: ActivatedRoute,
@@ -51,6 +53,7 @@ export class HomeComponent implements OnInit {
     if (this.filterWatched === undefined) {
       this.filterWatched = "notWatched"
     }
+    this.uniqueTags = this.movies.map(m => m.tags?.join()).filter((value, index, self) => self.indexOf(value) === index);
   }
 
   setFilterStatus(filterName: string, status: any) {
@@ -68,9 +71,9 @@ export class HomeComponent implements OnInit {
   setSortByName(sortByName: string, sortByDirection: string) {
     this.sortByName = sortByName;
     this.sortDirection = sortByDirection;
-    if(this.sortByName == 'AFI100LaughsRank'){
+    if (this.sortByName == 'AFI100LaughsRank') {
       this.filterTags = 'AFI100Laughs';
-      if(this.excludeTags == 'AFI100Laughs'){
+      if (this.excludeTags == 'AFI100Laughs') {
         this.excludeTags = undefined;
       }
     }
