@@ -19,5 +19,6 @@ export interface Movie {
     budget?: string,
     openingWeekendUSA?: string,
     tags?: string[],
-    comments?: string[]
+    comments?: string[],
+    worldwideGross?: string
   }

@@ -31,4 +31,15 @@ export class ApiService {
     return this.http.post(url, body, {responseType: 'text'}).toPromise();
   }
 
+  addToNomie(title:string, rating: number, date: any){
+    const url = environment.nomieUrl;
+    let body = {
+      note: `#movie(${rating}) ${title}`,
+      api_key: environment.nomieKey,
+      date: {date}
+    }
+    console.log(body)
+    return this.http.post(url, body, {responseType: 'text'}).toPromise();
+  }
+
 }

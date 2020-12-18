@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   filterStars: any;
   filterCategory: any;
   filterTags: any;
+  excludeTags: any = '';
 
   constructor(
     private dbService: DatabaseService,
@@ -50,26 +51,29 @@ export class HomeComponent implements OnInit {
     if (this.filterWatched === undefined) {
       this.filterWatched = "notWatched"
     }
-    console.log(this.movies)
   }
 
   setFilterStatus(filterName: string, status: any) {
     switch (filterName) {
       case "filterWatched": this.filterWatched = status; break;
       case "filterTitle": this.filterTitle = status; break;
+      case "filterTags": this.filterTags = status; break;
+      case "excludeTags": this.excludeTags = status; break;
     }
+
+    console.log(this.filterTags)
+    console.log(this.excludeTags)
   }
 
   setSortByName(sortByName: string, sortByDirection: string) {
     this.sortByName = sortByName;
     this.sortDirection = sortByDirection;
     if(this.sortByName == 'AFI100LaughsRank'){
-      this.filterTags = 'AFI100Laughs'
+      this.filterTags = 'AFI100Laughs';
+      if(this.excludeTags == 'AFI100Laughs'){
+        this.excludeTags = undefined;
+      }
     }
-  }
-
-  setCategoryName(categoryName: any){
-    this.filterTags = categoryName;
   }
 
   searchBar(searchText: any) {
@@ -103,6 +107,7 @@ export class HomeComponent implements OnInit {
       this.filterWriter = params['writer'];
       this.filterTags = params['tags']
       this.filterStars = params['stars'];
+      this.excludeTags = params['exclude']
     }
   }
 
@@ -115,6 +120,7 @@ export class HomeComponent implements OnInit {
     this.filterWriter = undefined;
     this.filterStars = undefined;
     this.filterTags = undefined;
+    this.excludeTags = '';
   }
 
 }

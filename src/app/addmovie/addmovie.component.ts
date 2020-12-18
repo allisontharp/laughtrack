@@ -54,7 +54,8 @@ export class AddmovieComponent implements OnInit {
       stars: response.Actors.split(','),
       runtime: response.Runtime, 
       releaseDate: response.Released,
-      genres: response.Genre
+      genres: response.Genre,
+      worldwideGross: response.BoxOffice
     }
 
     console.log(movie);

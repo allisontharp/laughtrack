@@ -3,7 +3,7 @@ import { Movie } from '../models/movie.model';
 import { IDyanamoDb } from '../models/dynamoDb.model';
 import { DatabaseService } from '../services/database/database.service';
 import { formatDate } from '@angular/common';
-// import { DatePipe } from '@angular/common';
+import { ApiService } from '../services/api/api.service';
 
 @Component({
   selector: 'app-logger-card',
@@ -20,10 +20,13 @@ export class LoggerCardComponent implements OnInit {
   dynamoDbRow: IDyanamoDb = <IDyanamoDb>{};
   addWatchHistoryDate: Date | undefined;
   showAddHistory = false;
+  justWatched = false;
+  justRated: number | undefined;
 
 
   constructor(
-    private databaseService: DatabaseService
+    private databaseService: DatabaseService,
+    private apiService: ApiService,
   ) { }
 
   ngOnInit() {
@@ -66,6 +69,12 @@ export class LoggerCardComponent implements OnInit {
       else {
         this.movie.dateWatched.push(new Date()); // this shouldnt happen bc there shouldnt be dates if the status is not 'hasWatched' but just in case
       }
+      this.justWatched = true;
+      console.log(this.justWatched)
+      console.log(this.justRated)
+      if (this.justRated !== undefined) {
+        this.addToNomie();
+      }
     }
     else {
       this.movie.watched = 'notWatched';
@@ -84,6 +93,13 @@ export class LoggerCardComponent implements OnInit {
           source: person,
           rating: rating
         })
+
+      }
+      this.justRated = this.movie.ratings.filter((r) => r.source == 'Allison')[0].rating;
+      console.log(this.justRated)
+      console.log(this.justWatched)
+      if (this.justWatched) {
+        this.addToNomie();
       }
     }
     await this.databaseService.updateMovie(this.movie);
@@ -98,25 +114,38 @@ export class LoggerCardComponent implements OnInit {
       if (this.movie.dateWatched == undefined) {
         this.movie.dateWatched = [this.addWatchHistoryDate]
       } else {
-        this.movie.dateWatched.push(this.addWatchHistoryDate)
+        this.movie.dateWatched.push(this.addWatchHistoryDate);
+        this.justWatched = false;
       }
       this.movie.dateWatched = this.movie.dateWatched.filter((item, i, ar) => ar.indexOf(item) == i); // Remove dupes
-      if(this.movie.watched === undefined || this.movie.watched == 'NotWatched'){
+      if (this.movie.watched === undefined || this.movie.watched == 'NotWatched') {
         this.movie.watched = 'hasWatched';
+        this.justWatched = true;
+        console.log(this.justWatched)
+        console.log(this.justRated)
+        if (this.justRated !== undefined) {
+          this.addToNomie();
+        }
       }
       await this.databaseService.updateMovie(this.movie);
+
+
     }
     this.showAddHistory = !this.showAddHistory;
   }
 
-  async removeDateWatched(date: any){
-    if(this.movie.dateWatched !== undefined){
+  async removeDateWatched(date: any) {
+    if (this.movie.dateWatched !== undefined) {
       this.movie.dateWatched = this.movie.dateWatched.filter((item) => item != date);
-      if(this.movie.dateWatched.length == 0){
+      if (this.movie.dateWatched.length == 0) {
         this.movie.watched = 'NotWatched';
       }
       await this.databaseService.updateMovie(this.movie);
     }
+  }
+
+  async addToNomie() {
+    await this.apiService.addToNomie(this.movie.title, this.justRated ? this.justRated : 0, Date.now());
   }
 
 

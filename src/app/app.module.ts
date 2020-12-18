@@ -14,6 +14,7 @@ import { SortPipe } from './pipes/sort/sort.pipe';
 import { HeaderbarComponent } from './headerbar/headerbar.component';
 import { ReportsPageComponent } from './reports-page/reports-page.component';
 import { AddmovieComponent } from './addmovie/addmovie.component';
+import { ExcludePipe } from './pipes/exclude/exclude.pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AddmovieComponent } from './addmovie/addmovie.component';
     HeaderbarComponent,
     ReportsPageComponent,
     AddmovieComponent,
+    ExcludePipe,
   ],
   imports: [
     BrowserModule,

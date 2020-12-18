@@ -35,9 +35,20 @@
           Category:
         </button>
         <div class="dropdown-menu border-secondary" aria-labelledby="watchedDropDown">
-          <a class="dropdown-item" (click)="setCategoryName('AFI100Laughs')">AFI 100 Laughs</a>
-          <a class="dropdown-item" (click)="setCategoryName('WantToWatch')">Want To Watch</a>
-          <a class="dropdown-item" (click)="setCategoryName(undefined)">All</a>
+          <a class="dropdown-item" (click)="setFilterStatus('filterTags','AFI100Laughs')">AFI 100 Laughs</a>
+          <a class="dropdown-item" (click)="setFilterStatus('filterTags','WantToWatch')">Want To Watch</a>
+          <a class="dropdown-item" (click)="setFilterStatus('filterTags',undefined)">All</a>
+        </div>
+      </div>
+      <div class="dropdown" style="display: inline;margin-right:1rem">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="watchedDropDown" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Exclude:
+        </button>
+        <div class="dropdown-menu border-secondary" aria-labelledby="watchedDropDown">
+          <a class="dropdown-item" (click)="setFilterStatus('excludeTags','AFI100Laughs')">AFI 100 Laughs</a>
+          <a class="dropdown-item" (click)="setFilterStatus('excludeTags','WantToWatch')">Want To Watch</a>
+          <a class="dropdown-item" (click)="setFilterStatus('excludeTags','')">None</a>
         </div>
       </div>
       <button class="btn btn-outline-secondary"  (click)="clearFilters()">Clear</button>
@@ -46,7 +57,9 @@
 
     <!-- Card Stack -->
     <div class="card-deck" style="justify-content: left">
-      <div *ngFor="let m of movies | filter:{watched: filterWatched, title: filterTitle, year: filterYear, genres: filterGenres, director: filterDirector, writer: filterWriter, stars: filterStars, tags: filterTags} 
+      <div *ngFor="let m of movies 
+      | filter:{watched: filterWatched, title: filterTitle, year: filterYear, genres: filterGenres, director: filterDirector, writer: filterWriter, stars: filterStars, tags: filterTags} 
+      | exclude:{tags: excludeTags}
       | sort:sortDirection:sortByName">
         <app-movie-card [movie]="m" [showTags]=false></app-movie-card>
       </div>

@@ -18,7 +18,8 @@ export class MoviePageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private databaseService: DatabaseService,
-    private sb: SearchbarService
+    private sb: SearchbarService,
+    
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +47,8 @@ export class MoviePageComponent implements OnInit {
   searchBar(searchText: string) {
     this.sb.searchBar(searchText);
   }
+
+  
 
 }
 
