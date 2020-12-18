@@ -19,12 +19,14 @@ export class MovieCardComponent implements OnInit {
   @Input() showTags: boolean = true;
   ratings: any;
   imdbRating!: Rating;
+  encodedURL!: string;
   
   ngOnInit(): void {
     this.ratings = this.movie.ratings;
     this.imdbRating = this.ratings.filter(function (rating: Rating) {
       return rating.source === 'IMDB';
     })[0]
+    this.encodedURL = encodeURIComponent(this.movie.title);
   }
 
   async watch(){

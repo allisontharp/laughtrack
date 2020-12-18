@@ -1,13 +1,13 @@
 <div class="card border-secondary  mb-3" style="max-width: 20rem;">
     <div style="width:20rem;height:30rem;overflow:hidden;">
-        <a href="Movie/{{movie.title}}" class="card-title font-size: 55px">
+        <a href="Movie/{{encodedURL}}" class="card-title font-size: 55px">
             <img style="width:100%;height:auto;" src="{{movie.image}}"  class="card-img-top" alt={{movie.title}}/>
         </a>
     </div>
 
     <div class="card-body">
         <h5 class="card-title font-size: 55px">
-            <a href="Movie/{{movie.title}}" class="card-title font-size: 55px">{{movie.title}}</a>
+            <a href="Movie/{{encodedURL}}" class="card-title font-size: 55px">{{movie.title}}</a>
         </h5>
         <div>
             <h6 class="card-subtitle">

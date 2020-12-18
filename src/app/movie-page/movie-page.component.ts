@@ -25,7 +25,7 @@ export class MoviePageComponent implements OnInit {
   ngOnInit(): void {
     let id: string;
     this.sub = this.route.params.subscribe(async params => {
-      id = params['id'];
+      id = decodeURIComponent(params['id']);
       this.movie = await this.databaseService.getMovie(id);
       this.wikipediaURL = this.movie.title.replace(' ', '_')
     });
