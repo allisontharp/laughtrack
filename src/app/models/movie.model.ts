@@ -20,5 +20,6 @@ export interface Movie {
     openingWeekendUSA?: string,
     tags?: string[],
     comments?: string[],
-    worldwideGross?: string
+    worldwideGross?: string,
+    AFI100LaughsRank?: string
   }

@@ -3,8 +3,6 @@ import { Movie } from '../models/movie.model';
 import {Rating} from '../models/rating.model';
 import { DatabaseService } from '../services/database/database.service';
 
-// TO DO: URL encode the title (bc of Victor/Victoria)
-
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',

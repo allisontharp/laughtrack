@@ -17,8 +17,8 @@
                     <br>
                     <b>Writers: </b>
                     <div *ngFor="let w of movie.writer" style="display: inline">
-                            <a href="/?writer={{w}}">{{w}}</a>&nbsp;
-                        </div>
+                        <a href="/?writer={{w}}">{{w}}</a>&nbsp;
+                    </div>
                     <br>
                     <b>Stars: </b>
                     <div *ngFor="let s of movie.stars" style="display: inline">
@@ -34,6 +34,10 @@
                     </div>
                     <br><a href="https://en.wikipedia.org/wiki/{{wikipediaURL}}"><i class="fab fa-wikipedia-w"></i></a>
                     &nbsp;<a href="https://www.imdb.com/title/tt{{movie.id}}"><i class="fab fa-imdb"></i></a>
+                    <br>
+                    <div *ngIf="movie.AFI100LaughsRank !== undefined;">
+                        <b>AFI 100 Laughs Rank: </b>{{movie.AFI100LaughsRank}}
+                    </div>
                     <hr>
                     <h4><b>Box Office</b></h4>
                     <b>Budget:</b> {{movie.budget}}
@@ -47,7 +51,7 @@
                         </div>
                         &nbsp;
                         <div style="display: inline;" *ngIf="showTag;">
-                            <div *ngFor="let t of uniqueTags"style="display: inline-block; padding: 3px">
+                            <div *ngFor="let t of uniqueTags" style="display: inline-block; padding: 3px">
                                 <div class="list-group-item" (click)="addTag(t)">{{t}}</div>
                             </div>
                             <div class="form-group" style="max-width: 50%;">
