@@ -70,8 +70,6 @@ export class LoggerCardComponent implements OnInit {
         this.movie.dateWatched.push(new Date()); // this shouldnt happen bc there shouldnt be dates if the status is not 'hasWatched' but just in case
       }
       this.justWatched = true;
-      console.log(this.justWatched)
-      console.log(this.justRated)
       if (this.justRated !== undefined) {
         this.addToNomie();
       }
@@ -96,8 +94,6 @@ export class LoggerCardComponent implements OnInit {
 
       }
       this.justRated = this.movie.ratings.filter((r) => r.source == 'Allison')[0].rating;
-      console.log(this.justRated)
-      console.log(this.justWatched)
       if (this.justWatched) {
         this.addToNomie();
       }
@@ -121,8 +117,6 @@ export class LoggerCardComponent implements OnInit {
       if (this.movie.watched === undefined || this.movie.watched == 'NotWatched') {
         this.movie.watched = 'hasWatched';
         this.justWatched = true;
-        console.log(this.justWatched)
-        console.log(this.justRated)
         if (this.justRated !== undefined) {
           this.addToNomie();
         }

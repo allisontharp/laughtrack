@@ -55,8 +55,6 @@ export class HomeComponent implements OnInit {
       this.filterWatched = "notWatched"
     }
     this.uniqueTags = this.movies.map(m => m.tags?.join()).filter((value, index, self) => self.indexOf(value) === index);
-    console.log('excludetags:')
-    console.log(this.excludeTags)
   }
 
   setFilterStatus(filterName: string, status: any) {
@@ -67,8 +65,6 @@ export class HomeComponent implements OnInit {
       case "excludeTags": this.excludeTags = status; break;
     }
 
-    console.log(this.filterTags)
-    console.log(this.excludeTags)
   }
 
   setSortByName(sortByName: string, sortByDirection: string) {

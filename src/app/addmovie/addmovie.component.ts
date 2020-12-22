@@ -30,11 +30,9 @@ export class AddmovieComponent implements OnInit {
 
   async search(event: any){
     this.movies = JSON.parse(await this.omdb.queryMovies(this.searchInput)).Search
-    console.log(this.movies)
   }
 
   async addMovieToWatchList(imdbID: any){
-    console.log(imdbID)
     let response = JSON.parse(await this.omdb.getMovie('i='+imdbID))
     let rating: Rating = {
       source: 'IMDB',
@@ -58,7 +56,6 @@ export class AddmovieComponent implements OnInit {
       worldwideGross: response.BoxOffice
     }
 
-    console.log(movie);
     await this.db.updateMovie(movie)
   }
 

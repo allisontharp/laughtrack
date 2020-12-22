@@ -14,13 +14,11 @@ export class OmdbService {
 
   queryMovies(title: string){
     const url = this.apiUrl + '&s=' + title + '&type=movie'
-    console.log(url)
     return this.http.get(url, {responseType: 'text'}).toPromise();
   }
 
   getMovie(title: string){
     const url = this.apiUrl + '&' + title
-    console.log(url)
     return this.http.get(url, {responseType: 'text'}).toPromise();
   }
 }

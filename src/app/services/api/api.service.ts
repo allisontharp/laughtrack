@@ -38,7 +38,6 @@ export class ApiService {
       api_key: environment.nomieKey,
       date: {date}
     }
-    console.log(body)
     return this.http.post(url, body, {responseType: 'text'}).toPromise();
   }
 

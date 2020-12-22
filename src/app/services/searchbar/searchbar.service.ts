@@ -31,7 +31,6 @@ export class SearchbarService {
         params[pair[0]] = pair[1];
       }
     }
-    console.log(params);
 
     this.router.navigate([''], { queryParams: params });
   }

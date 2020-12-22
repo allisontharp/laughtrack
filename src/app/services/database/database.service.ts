@@ -15,6 +15,7 @@ export class DatabaseService {
   ) { }
 
   async getMovies(){
+    this.movies = [];
     this.dynamoDbRow = <IDyanamoDb> {};
     this.dynamoDbRow.key = 'sk';
     this.dynamoDbRow.value = 'Movie'
