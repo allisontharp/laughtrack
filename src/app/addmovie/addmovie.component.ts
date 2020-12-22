@@ -14,14 +14,18 @@ import { SearchbarService } from '../services/searchbar/searchbar.service';
 export class AddmovieComponent implements OnInit {
   searchInput: any;
   movies!: any[];
-
+  tagName: string | undefined;
+  showTag = false;
+  uniqueTags: any; 
+  
   constructor(
     private sb: SearchbarService,
     private omdb: OmdbService,
     private db: DatabaseService
   ) { }
 
-  ngOnInit(){
+  async ngOnInit(){
+    this.uniqueTags = (await this.db.getMovies()).map(m => m.tags?.join()).filter((value, index, self) => self.indexOf(value) === index);
   }
 
   searchBar(searchText: string) {
@@ -39,6 +43,10 @@ export class AddmovieComponent implements OnInit {
       rating: Number(response.imdbRating),
       numberVotes: Number(response.imdbVotes)
     }
+    let tags: string[] = [];
+    if (this.tagName !== undefined){
+      tags.push(this.tagName);
+    }
     let movie: Movie = {
       title: response.Title,
       year: response.Year,
@@ -53,10 +61,26 @@ export class AddmovieComponent implements OnInit {
       runtime: response.Runtime, 
       releaseDate: response.Released,
       genres: response.Genre,
-      worldwideGross: response.BoxOffice
+      worldwideGross: response.BoxOffice,
+      tags: tags
     }
-
     await this.db.updateMovie(movie)
+  }
+
+  async addTag(name?: string) {
+    if(name !== undefined){
+      this.tagName = name;
+    }
+    // if (this.tagName !== undefined) {
+    //   if (this.movie.tags === undefined) {
+    //     this.movie.tags = [this.tagName]
+    //   } else {
+    //     this.movie.tags.push(this.tagName)
+    //   }
+    //   this.movie.tags = this.movie.tags.filter((item, i, ar) => ar.indexOf(item) == i); // Remove dupes
+    //   await this.databaseService.updateMovie(this.movie);
+    // }
+    this.showTag = !this.showTag;
   }
 
 }
