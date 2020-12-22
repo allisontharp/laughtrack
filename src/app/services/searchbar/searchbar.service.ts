@@ -15,17 +15,23 @@ export class SearchbarService {
     let regex = /\w+:.*?(?=\s+\w+:|$)/g
     var objMatch = regex.exec(searchText);
     var arr = new Array();
+
     
     let params: {[k: string]: any} = {};
     let pair = [];
-    while (objMatch != null) {
-      arr[arr.length] = objMatch[0];
-      objMatch = regex.exec(searchText);
+    if (searchText !== undefined && objMatch === null) { // search didnt include :
+      params = {title: searchText}
+    } else {
+      while (objMatch != null) {
+        arr[arr.length] = objMatch[0];
+        objMatch = regex.exec(searchText);
+      }
+      for (var i = 0; i < arr.length; i++) {
+        pair = arr[i].split(':')
+        params[pair[0]] = pair[1];
+      }
     }
-    for (var i = 0; i < arr.length; i++) {
-      pair = arr[i].split(':')
-      params[pair[0]] = pair[1];
-    }
+    console.log(params);
 
     this.router.navigate([''], { queryParams: params });
   }

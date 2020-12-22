@@ -111,7 +111,7 @@ export class HomeComponent implements OnInit {
       this.filterGenres = params['genres'];
       this.filterDirector = params['director'];
       this.filterWriter = params['writer'];
-      this.filterTags = params['tags']
+      this.filterTags = params['tags'];
       this.filterStars = params['stars'];
       this.excludeTags = params['exclude'] ? params['exclude'] : ''
     }
