@@ -33,8 +33,7 @@ export class MoviePageComponent implements OnInit {
       this.wikipediaURL = this.movie.title.replace(' ', '_')
     });
     this.movies = await this.databaseService.getMovies();
-    this.uniqueTags = this.movies.map(m => m.tags?.join()).filter((value, index, self) => self.indexOf(value) === index);
-    console.log(this.uniqueTags)
+    // this.uniqueTags = this.movies.map(m => m.tags?.join()).filter((value, index, self) => self.indexOf(value) === index);
   }
 
   async addTag(name?: string) {

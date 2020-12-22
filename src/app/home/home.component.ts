@@ -42,7 +42,8 @@ export class HomeComponent implements OnInit {
         this.filterWriter = params['writer']
         this.filterStars = params['stars']
         this.filterTags = params['tags']
-      }
+        this.excludeTags = params['exclude'] ? params['exclude'] : '';
+    }
     });
 
   }
@@ -54,6 +55,8 @@ export class HomeComponent implements OnInit {
       this.filterWatched = "notWatched"
     }
     this.uniqueTags = this.movies.map(m => m.tags?.join()).filter((value, index, self) => self.indexOf(value) === index);
+    console.log('excludetags:')
+    console.log(this.excludeTags)
   }
 
   setFilterStatus(filterName: string, status: any) {
@@ -110,8 +113,9 @@ export class HomeComponent implements OnInit {
       this.filterWriter = params['writer'];
       this.filterTags = params['tags']
       this.filterStars = params['stars'];
-      this.excludeTags = params['exclude']
+      this.excludeTags = params['exclude'] ? params['exclude'] : ''
     }
+
   }
 
   clearFilters() {
