@@ -15,6 +15,7 @@ export class MoviePageComponent implements OnInit {
   showTag = false;
   tagName: string | undefined;
   wikipediaURL: string | undefined;
+  justWatchURL: string | undefined;
   uniqueTags: any; 
   movies!: Movie[];
   
@@ -30,7 +31,8 @@ export class MoviePageComponent implements OnInit {
     this.sub = this.route.params.subscribe(async params => {
       id = decodeURIComponent(params['id']);
       this.movie = await this.databaseService.getMovie(id);
-      this.wikipediaURL = this.movie.title.replace(' ', '_')
+      this.wikipediaURL = this.movie.title.replace(/ /g, '_')
+      this.justWatchURL = this.movie.title.replace(/ /g, '-')
     });
     this.movies = await this.databaseService.getMovies();
     this.uniqueTags = this.movies.map(m => m.tags?.join()).filter((value, index, self) => self.indexOf(value) === index);
