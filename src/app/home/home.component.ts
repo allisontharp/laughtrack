@@ -10,72 +10,53 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   movies: Movie[] = [];
-  sortByName = "AFI100LaughsRank";
-  sortDirection = "desc";
+  sortByName: string | undefined;
+  sortDirection: string | undefined;
   data: any
   private sub: any;
-  filterTitle: string | undefined;
-  filterYear: string | undefined;
-  filterWatched: string | undefined;
-  filterGenres: any;
-  filterDirector: any;
-  filterWriter: any;
-  filterStars: any;
-  filterCategory: any;
-  filterTags: any;
-  excludeTags: any = '';
 
+  filters = new Map<string, string | undefined>();
   uniqueTags: any;
 
   constructor(
     private dbService: DatabaseService,
     private route: ActivatedRoute,
   ) {
-    this.sub = this.route.queryParams.subscribe(async params => {
-      this.data = params;
-      if (params !== undefined) {
-        this.filterTitle = params['title'];
-        this.filterYear = params['year'];
-        this.filterWatched = params['watched']
-        this.filterGenres = params['genres']
-        this.filterDirector = params['director']
-        this.filterWriter = params['writer']
-        this.filterStars = params['stars']
-        this.filterTags = params['tags']
-        this.excludeTags = params['exclude'] ? params['exclude'] : '';
-    }
-    });
-
+    this.setFilters();
   }
 
 
   async ngOnInit(): Promise<void> {
     this.movies = await this.dbService.getMovies();
-    if (this.filterWatched === undefined) {
-      this.filterWatched = "notWatched"
+    if (this.filters.get('watched') === undefined) {
+      this.filters.set('watched', 'notWatched')
+    }
+    if(this.sortByName === undefined){
+      this.sortByName = 'AFI100LaughsRank'
+      this.sortDirection = 'desc'
+      this.filters.set('tags', 'AFI100Laughs')
+    }
+    if(this.filters.get('exclude')===undefined){
+      this.filters.set('exclude', '')
     }
     this.uniqueTags = this.movies.map(m => m.tags?.join()).filter((value, index, self) => self.indexOf(value) === index);
   }
 
   setFilterStatus(filterName: string, status: any) {
-    switch (filterName) {
-      case "filterWatched": this.filterWatched = status; break;
-      case "filterTitle": this.filterTitle = status; break;
-      case "filterTags": this.filterTags = status; break;
-      case "excludeTags": this.excludeTags = status; break;
-    }
-
+    this.filters.set(filterName, status);
   }
 
   setSortByName(sortByName: string, sortByDirection: string) {
     this.sortByName = sortByName;
     this.sortDirection = sortByDirection;
     if (this.sortByName == 'AFI100LaughsRank') {
-      this.filterTags = 'AFI100Laughs';
-      if (this.excludeTags == 'AFI100Laughs') {
-        this.excludeTags = undefined;
+      this.filters.set('tags', 'AFI100Laughs');
+      if (this.filters.get('exclude') == 'AFI100Laughs') {
+        this.filters.set('exclude', undefined);
       }
     }
+    console.log(this.sortByName);
+    console.log(this.sortDirection)
   }
 
   searchBar(searchText: any) {
@@ -85,7 +66,7 @@ export class HomeComponent implements OnInit {
     var arr = new Array();
 
     if (searchText !== undefined && objMatch === null) { // search didnt include :
-      this.filterTitle = searchText;
+      this.filters.set('title', searchText);
       return
     }
 
@@ -100,30 +81,31 @@ export class HomeComponent implements OnInit {
       params[pair[0]] = pair[1];
     }
 
-    if (params !== undefined) {
-      this.filterTitle = params['title'];
-      this.filterYear = params['year'];
-      this.filterWatched = params['watched'];
-      this.filterGenres = params['genres'];
-      this.filterDirector = params['director'];
-      this.filterWriter = params['writer'];
-      this.filterTags = params['tags'];
-      this.filterStars = params['stars'];
-      this.excludeTags = params['exclude'] ? params['exclude'] : ''
-    }
+    this.setFilters();
 
   }
 
   clearFilters() {
-    this.filterTitle = undefined;
-    this.filterYear = undefined;
-    this.filterWatched = undefined;
-    this.filterGenres = undefined;
-    this.filterDirector = undefined;
-    this.filterWriter = undefined;
-    this.filterStars = undefined;
-    this.filterTags = undefined;
-    this.excludeTags = '';
+    this.filters.set('title', undefined)
+    this.filters.set('title', undefined);
+    this.filters.set('year', undefined);
+    this.filters.set('watched', undefined);
+    this.filters.set('genres', undefined);
+    this.filters.set('director', undefined);
+    this.filters.set('writer', undefined);
+    this.filters.set('stars', undefined);
+    this.filters.set('tags', undefined);
+    this.filters.set('exclude', '');
+  }
+
+  setFilters() {
+    this.sub = this.route.queryParams.subscribe(async params => {
+      this.data = params;
+      if (params !== undefined) {
+        this.filters.forEach((value: string | undefined, key: string) => { this.filters.set(key, params[key]) }
+        )
+      }
+    });
   }
 
 }

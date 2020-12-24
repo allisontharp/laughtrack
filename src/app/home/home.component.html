@@ -12,9 +12,9 @@
           All Movies:
         </button>
         <div class="dropdown-menu border-secondary" aria-labelledby="watchedDropDown">
-          <a class="dropdown-item" (click)="setFilterStatus('filterWatched', 'hasWatched')">Watched</a>
-          <a class="dropdown-item" (click)="setFilterStatus('filterWatched', 'notWatched')">Not Watched</a>
-          <a class="dropdown-item" (click)="setFilterStatus('filterWatched', undefined)">Both</a>
+          <a class="dropdown-item" (click)="setFilterStatus('watched', 'hasWatched')">Watched</a>
+          <a class="dropdown-item" (click)="setFilterStatus('watched', 'notWatched')">Not Watched</a>
+          <a class="dropdown-item" (click)="setFilterStatus('watched', undefined)">Both</a>
         </div>
       </div>
       <div class="dropdown" style="display: inline;margin-right:1rem">
@@ -37,10 +37,10 @@
           Category:
         </button>
         <div class="dropdown-menu border-secondary" aria-labelledby="watchedDropDown">
-          <a class="dropdown-item" (click)="setFilterStatus('filterTags','AFI100Laughs')">AFI 100 Laughs</a>
-          <a class="dropdown-item" (click)="setFilterStatus('filterTags','WantToWatch')">Want To Watch</a>
-          <a class="dropdown-item" (click)="setFilterStatus('filterTags','AcademyAwardBestPicture')">Academy Award Best Picture</a>
-          <a class="dropdown-item" (click)="setFilterStatus('filterTags',undefined)">All</a>
+          <a class="dropdown-item" (click)="setFilterStatus('tags','AFI100Laughs')">AFI 100 Laughs</a>
+          <a class="dropdown-item" (click)="setFilterStatus('tags','WantToWatch')">Want To Watch</a>
+          <a class="dropdown-item" (click)="setFilterStatus('tags','AcademyAwardBestPicture')">Academy Award Best Picture</a>
+          <a class="dropdown-item" (click)="setFilterStatus('tags',undefined)">All</a>
         </div>
       </div>
       <div class="dropdown" style="display: inline;margin-right:1rem">
@@ -49,10 +49,10 @@
           Exclude:
         </button>
         <div class="dropdown-menu border-secondary" aria-labelledby="watchedDropDown">
-          <a class="dropdown-item" (click)="setFilterStatus('excludeTags','AFI100Laughs')">AFI 100 Laughs</a>
-          <a class="dropdown-item" (click)="setFilterStatus('excludeTags','WantToWatch')">Want To Watch</a>
-          <a class="dropdown-item" (click)="setFilterStatus('excludeTags','AcademyAwardBestPicture')">Academy Award Best Picture</a>
-          <a class="dropdown-item" (click)="setFilterStatus('excludeTags','')">None</a>
+          <a class="dropdown-item" (click)="setFilterStatus('exclude','AFI100Laughs')">AFI 100 Laughs</a>
+          <a class="dropdown-item" (click)="setFilterStatus('exclude','WantToWatch')">Want To Watch</a>
+          <a class="dropdown-item" (click)="setFilterStatus('exclude','AcademyAwardBestPicture')">Academy Award Best Picture</a>
+          <a class="dropdown-item" (click)="setFilterStatus('exclude','')">None</a>
         </div>
       </div>
       <button class="btn btn-outline-secondary"  (click)="clearFilters()">Clear</button>
@@ -62,8 +62,8 @@
     <!-- Card Stack -->
     <div class="card-deck" style="justify-content: left">
       <div *ngFor="let m of movies 
-      | filter:{watched: filterWatched, title: filterTitle, year: filterYear, genres: filterGenres, director: filterDirector, writer: filterWriter, stars: filterStars, tags: filterTags} 
-      | exclude:{tags: excludeTags}
+      | filter:{watched: filters.get('watched'), title: filters.get('title'), year: filters.get('year'), genres: filters.get('genres'), director: filters.get('director'), writer: filters.get('writer'), stars: filters.get('stars'), tags: filters.get('tags')} 
+      | exclude:{tags: filters.get('exclude')}
       | sort:sortDirection:sortByName">
         <app-movie-card [movie]="m" [showTags]=false></app-movie-card>
       </div>
