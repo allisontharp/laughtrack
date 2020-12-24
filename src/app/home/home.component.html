@@ -4,11 +4,13 @@
 <br>
 
 <div>
-  <div class="jumbotron">
-    <b>filters: </b>
-    <div *ngFor="let f of filters | keyvalue " style="display: inline;">
-      <div *ngIf="f.value !== undefined && f.value !== ''" style="display: inline;">
-        {{f.key}}({{f.value}})
+  <div class="jumbotron" style="margin-top:0rem">
+    <div style="padding-top:1px">
+      <b>filters: </b>
+      <div *ngFor="let f of filters | keyvalue " style="display: inline;">
+        <div *ngIf="f.value !== undefined && f.value !== ''" style="display: inline;">
+          {{f.key}}({{f.value}})
+        </div>
       </div>
     </div>
     <!-- Filter Bar -->
