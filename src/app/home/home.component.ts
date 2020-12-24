@@ -12,23 +12,27 @@ export class HomeComponent implements OnInit {
   movies: Movie[] = [];
   sortByName: string | undefined;
   sortDirection: string | undefined;
-  data: any
   private sub: any;
   movieCount: number = 0;
 
   filters = new Map<string, string | undefined>();
+  filterArray = ['title', 'year', 'watched', 'genres', 'director', 'writer', 'stars', 'tags', 'exclude']
+  dropdownArray = ['watched', 'tags', 'exclude']
   uniqueTags: any;
 
   constructor(
     private dbService: DatabaseService,
     private route: ActivatedRoute,
   ) {
-    this.setFilters();
+    this.sub = this.route.queryParams.subscribe(async params => {
+      this.setFilters(params);
+    });
   }
 
 
   async ngOnInit(): Promise<void> {
     this.movies = await this.dbService.getMovies();
+    this.initalizeFilters();
     if (this.filters.get('watched') === undefined) {
       this.filters.set('watched', 'notWatched')
     }
@@ -61,6 +65,7 @@ export class HomeComponent implements OnInit {
   }
 
   searchBar(searchText: any) {
+    this.clearFilters(true);
     // Split into keyvalue pairs (title:<title> year:<year>])
     let regex = /\w+:.*?(?=\s+\w+:|$)/g
     var objMatch = regex.exec(searchText);
@@ -81,49 +86,55 @@ export class HomeComponent implements OnInit {
       pair = arr[i].split(':')
       params[pair[0]] = pair[1];
     }
-
-    this.setFilters();
-
-  }
-
-  clearFilters() {
-    this.filters.set('title', undefined)
-    this.filters.set('title', undefined);
-    this.filters.set('year', undefined);
-    this.filters.set('watched', undefined);
-    this.filters.set('genres', undefined);
-    this.filters.set('director', undefined);
-    this.filters.set('writer', undefined);
-    this.filters.set('stars', undefined);
-    this.filters.set('tags', undefined);
-    this.filters.set('exclude', '');
+    this.setFilters(params);
     this.getMovieCount();
   }
 
-  setFilters() {
-    this.sub = this.route.queryParams.subscribe(async params => {
-      this.data = params;
-      if (params !== undefined) {
-        this.filters.forEach((value: string | undefined, key: string) => { this.filters.set(key, params[key]) }
-        )
+  clearFilters(keepDropdowns?: boolean) {
+    if(keepDropdowns == true){
+      let nonDropdownFilters = this.filterArray.filter( e => !this.dropdownArray.includes(e))
+      nonDropdownFilters.forEach((filter: string) => {
+        this.filters.set(filter, undefined);
+      })
+    } else {
+      this.filterArray.forEach((filter: string) => {
+        if(filter == 'exclude'){
+          this.filters.set('exclude', '')
+        } else {
+          this.filters.set(filter, undefined);
+        }
+      })
+    }
+    this.getMovieCount();
+  }
+
+  initalizeFilters(){
+    this.filterArray.forEach((filter: string) => {
+      if(this.filters.get(filter) === undefined){
+        this.filters.set(filter, undefined)
       }
-    });
+    })
+  }
+
+  setFilters(params: any) {
+    if (Object.keys(params).length > 0) {
+      Object.keys(params).forEach((key: string) => { this.filters.set(key, params[key]) }
+      )
+    }
     this.getMovieCount();
   }
 
   getMovieCount() {
     let filteredMovies = this.movies;
     this.filters.forEach((value: string | undefined, key: string) => {
-      console.log(key, value)
-      if(key == 'exclude'){
+      if (key == 'exclude') {
         filteredMovies = filteredMovies.filter((m: any) => m['tags'] != value)
-      }else if(value !== undefined){
-        filteredMovies = filteredMovies.filter((m: any) => m[key] == value);
+      } else if (value !== undefined) {
+        filteredMovies = filteredMovies.filter((m: any) => m[key] == value || new RegExp(value, 'gi').test(m[key]));
       }
-      console.log(filteredMovies.length)
     })
     this.movieCount = filteredMovies.length;
   }
 
-  
+
 }

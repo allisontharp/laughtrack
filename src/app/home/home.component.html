@@ -2,8 +2,15 @@
 
 <h2 style="margin-left: 20px; margin-top: 25px;">&nbsp;Movies ({{movieCount}})</h2>
 <br>
+
 <div>
   <div class="jumbotron">
+    <b>filters: </b>
+    <div *ngFor="let f of filters | keyvalue " style="display: inline;">
+      <div *ngIf="f.value !== undefined && f.value !== ''" style="display: inline;">
+        {{f.key}}({{f.value}})
+      </div>
+    </div>
     <!-- Filter Bar -->
     <div class="d-inline-block" style="margin-bottom: 1%; ">
       <div class="dropdown" style="display: inline; margin-right:1rem">
@@ -39,7 +46,8 @@
         <div class="dropdown-menu border-secondary" aria-labelledby="watchedDropDown">
           <a class="dropdown-item" (click)="setFilterStatus('tags','AFI100Laughs')">AFI 100 Laughs</a>
           <a class="dropdown-item" (click)="setFilterStatus('tags','WantToWatch')">Want To Watch</a>
-          <a class="dropdown-item" (click)="setFilterStatus('tags','AcademyAwardBestPicture')">Academy Award Best Picture</a>
+          <a class="dropdown-item" (click)="setFilterStatus('tags','AcademyAwardBestPicture')">Academy Award Best
+            Picture</a>
           <a class="dropdown-item" (click)="setFilterStatus('tags',undefined)">All</a>
         </div>
       </div>
@@ -51,11 +59,12 @@
         <div class="dropdown-menu border-secondary" aria-labelledby="watchedDropDown">
           <a class="dropdown-item" (click)="setFilterStatus('exclude','AFI100Laughs')">AFI 100 Laughs</a>
           <a class="dropdown-item" (click)="setFilterStatus('exclude','WantToWatch')">Want To Watch</a>
-          <a class="dropdown-item" (click)="setFilterStatus('exclude','AcademyAwardBestPicture')">Academy Award Best Picture</a>
+          <a class="dropdown-item" (click)="setFilterStatus('exclude','AcademyAwardBestPicture')">Academy Award Best
+            Picture</a>
           <a class="dropdown-item" (click)="setFilterStatus('exclude','')">None</a>
         </div>
       </div>
-      <button class="btn btn-outline-secondary"  (click)="clearFilters()">Clear</button>
+      <button class="btn btn-outline-secondary" (click)="clearFilters()">Clear</button>
 
     </div><!-- !filterBar -->
 
