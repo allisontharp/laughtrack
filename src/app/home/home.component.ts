@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   sortDirection: string | undefined;
   data: any
   private sub: any;
+  movieCount: number = 0;
 
   filters = new Map<string, string | undefined>();
   uniqueTags: any;
@@ -31,19 +32,21 @@ export class HomeComponent implements OnInit {
     if (this.filters.get('watched') === undefined) {
       this.filters.set('watched', 'notWatched')
     }
-    if(this.sortByName === undefined){
+    if (this.sortByName === undefined) {
       this.sortByName = 'AFI100LaughsRank'
       this.sortDirection = 'desc'
       this.filters.set('tags', 'AFI100Laughs')
     }
-    if(this.filters.get('exclude')===undefined){
+    if (this.filters.get('exclude') === undefined) {
       this.filters.set('exclude', '')
     }
     this.uniqueTags = this.movies.map(m => m.tags?.join()).filter((value, index, self) => self.indexOf(value) === index);
+    this.getMovieCount();
   }
 
   setFilterStatus(filterName: string, status: any) {
     this.filters.set(filterName, status);
+    this.getMovieCount();
   }
 
   setSortByName(sortByName: string, sortByDirection: string) {
@@ -55,8 +58,6 @@ export class HomeComponent implements OnInit {
         this.filters.set('exclude', undefined);
       }
     }
-    console.log(this.sortByName);
-    console.log(this.sortDirection)
   }
 
   searchBar(searchText: any) {
@@ -96,6 +97,7 @@ export class HomeComponent implements OnInit {
     this.filters.set('stars', undefined);
     this.filters.set('tags', undefined);
     this.filters.set('exclude', '');
+    this.getMovieCount();
   }
 
   setFilters() {
@@ -106,6 +108,22 @@ export class HomeComponent implements OnInit {
         )
       }
     });
+    this.getMovieCount();
   }
 
+  getMovieCount() {
+    let filteredMovies = this.movies;
+    this.filters.forEach((value: string | undefined, key: string) => {
+      console.log(key, value)
+      if(key == 'exclude'){
+        filteredMovies = filteredMovies.filter((m: any) => m['tags'] != value)
+      }else if(value !== undefined){
+        filteredMovies = filteredMovies.filter((m: any) => m[key] == value);
+      }
+      console.log(filteredMovies.length)
+    })
+    this.movieCount = filteredMovies.length;
+  }
+
+  
 }
