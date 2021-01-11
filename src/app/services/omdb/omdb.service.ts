@@ -12,8 +12,15 @@ export class OmdbService {
     this.apiUrl = environment.omdbApiUrl;
   }
 
-  queryMovies(title: string){
-    const url = this.apiUrl + '&s=' + title + '&type=movie'
+  queryMovies(params: any){
+    console.log(params)
+    let url = this.apiUrl + '&s=' + params['title'] + '&type=movie'
+    if(params['year'])
+    {
+      console.log(params['year'])
+      url += '&y=' + params['year']
+    }
+    console.log(url)
     return this.http.get(url, {responseType: 'text'}).toPromise();
   }
 

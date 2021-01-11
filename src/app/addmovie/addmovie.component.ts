@@ -33,7 +33,25 @@ export class AddmovieComponent implements OnInit {
   }
 
   async search(event: any){
-    this.movies = JSON.parse(await this.omdb.queryMovies(this.searchInput)).Search
+    let regex = /\w+:.*?(?=\s+\w+:|$)/g
+    var objMatch = regex.exec(this.searchInput);
+    var arr = new Array();
+    
+    let params: {[k: string]: any} = {};
+    let pair = [];
+    if (this.searchInput !== undefined && objMatch === null) { // search didnt include :
+      params = {title: this.searchInput}
+    } else {
+      while (objMatch != null) {
+        arr[arr.length] = objMatch[0];
+        objMatch = regex.exec(this.searchInput);
+      }
+      for (var i = 0; i < arr.length; i++) {
+        pair = arr[i].split(':')
+        params[pair[0]] = pair[1];
+      }
+    }
+    this.movies = JSON.parse(await this.omdb.queryMovies(params)).Search
   }
 
   async addMovieToWatchList(imdbID: any){
